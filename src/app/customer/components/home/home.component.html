@@ -1,0 +1,361 @@
+
+<app-carousel></app-carousel>
+<!-- <div class="products-industrial" style="width: 100%;">
+    <mat-tab-group dynamicHeight  preserveContent mat-stretch-tabs="false" mat-align-tabs="start" [color]="'primary'" [backgroundColor]="'warn'" style="width: 100%;">
+        @for (tab of tabTypes; track $index) {
+            <mat-tab label="{{tab.title}}" style="width: 100%;">
+                <app-slider-products [items]="tab.data" style="width: 100%;"></app-slider-products>
+            </mat-tab>      
+        }
+    </mat-tab-group>
+</div> -->
+<!-- @for (tab of tabTypes; track $index) {
+    <app-slider-products [items]="tab.data"></app-slider-products>
+ } -->
+
+
+
+
+
+ <div class="services">
+  <div class="container">
+    <div class="box">
+      <span class="icon"><mat-icon>local_shipping</mat-icon></span>
+      <div class="content">
+        <h4>Free Shipping</h4>
+        <span>On All Orders</span>
+      </div>
+    </div>
+    <div class="box">
+      <span class="icon"><mat-icon>thumb_up</mat-icon></span>
+      <div class="content">
+        <h4>Money Back Garanted</h4>
+        <span>Whiting 7 days</span>
+      </div>
+    </div>
+    <div class="box">
+      <span class="icon"><mat-icon>credit_card</mat-icon></span>
+      <div class="content">
+        <h4>Secure payment</h4>
+        <span>100% security on payments</span>
+      </div>
+    </div>
+    <div class="box">
+      <span class="icon"><mat-icon>headset_mic</mat-icon></span>
+      <div class="content">
+        <h4>24/7 live support</h4>
+        <span>Get help when you need</span>
+      </div>
+    </div>
+  </div>
+ </div>
+
+
+
+
+
+<!-- CATEGORIES LIST -->
+<div class="category" id="category">
+<h1 class="list-category-title">List of Categories</h1>
+  <div class="container">
+
+    <div class="category-item-container has-scrollbar">
+      @for (category of listCategories; track $index) {
+        <div class="category-item">
+
+          <div class="category-img-box">
+            <img [src]="category.imgUrl" alt="dress & frock" width="30">
+          </div>
+
+          <div class="category-content-box">
+
+            <div class="category-content-flex">
+              <h3 class="category-item-title">{{category.name}}</h3>
+
+              <p class="category-item-amount">({{category.countProducts}})</p>
+            </div>
+
+            <a href="#" class="category-btn">Show all</a>
+
+          </div>
+
+        </div>
+      }
+
+
+    </div>
+
+  </div>
+
+</div> 
+<!-- CATEGORIES LIST -->
+
+
+<mat-divider style="width: 100%;" ></mat-divider>
+<br>
+
+
+
+
+
+
+
+
+<!-- SLIDER PRODUCTS -->
+
+<div class="layout">
+    @for (tab of tabTypes; track $index) {
+    <input name="nav" type="radio" class="nav home-radio" id="{{tab.title}}" checked="checked" />
+    <div class="page home-page" style="margin: 10px 0;">
+      <div class="page-contents">
+        <app-slider-products [productsSlider]="tab.data"></app-slider-products>
+      </div>
+    </div>
+    <label class="nav" for="{{tab.title}}">
+        <mat-icon>{{tab.icon}}</mat-icon>
+      <span>
+        {{tab.title}}
+      </span>
+    </label>
+    }
+    
+</div>
+
+<!-- SLIDER PRODUCTS -->
+
+
+
+
+
+
+
+
+
+
+
+<mat-divider style="width: 100%;" ></mat-divider>
+<br>
+
+
+<!-- PRODUCT FOOTER -->
+   <div class="products-footer">
+    <div class="product-panel">
+      <div class="widget-column">
+        <div class="title">
+          <h4 class="widget-title">Product</h4>
+        </div>
+        <ul class="product-list">
+          <li>
+            <div class="media-image">
+              <a href="">
+                <img src="https://lazeapostolski.com/sophia-ecommerce/assets/images/product/small/headphone1/headphone1.png" alt="">
+              </a>
+            </div>
+            <div class="media-body">
+              <a href="">
+                <span>Product1</span>
+              </a>
+              <div>
+                <mat-icon>star_rate</mat-icon>
+                <mat-icon>star_rate</mat-icon>
+                <mat-icon>star_rate</mat-icon>
+                <mat-icon>star_rate</mat-icon>
+                <mat-icon>star_rate</mat-icon>
+                <mat-icon>star_rate</mat-icon>
+              </div>
+              <p class="price">175.00</p>
+            </div>
+          </li>
+          <li>
+            <div class="media-image">
+              <a href="">
+                <img src="https://lazeapostolski.com/sophia-ecommerce/assets/images/product/small/headphone1/headphone1.png" alt="">
+              </a>
+            </div>
+            <div class="media-body">
+              <a href="">
+                <span>Product1</span>
+              </a>
+              <div>
+                <mat-icon>star_rate</mat-icon>
+                <mat-icon>star_rate</mat-icon>
+                <mat-icon>star_rate</mat-icon>
+                <mat-icon>star_rate</mat-icon>
+                <mat-icon>star_rate</mat-icon>
+                <mat-icon>star_rate</mat-icon>
+              </div>
+              <p class="price">175.00</p>
+            </div>
+          </li>
+          <li>
+            <div class="media-image">
+              <a href="">
+                <img src="https://lazeapostolski.com/sophia-ecommerce/assets/images/product/small/headphone1/headphone1.png" alt="">
+              </a>
+            </div>
+            <div class="media-body">
+              <a href="">
+                <span>Product1</span>
+              </a>
+              <div>
+                <mat-icon>star_rate</mat-icon>
+                <mat-icon>star_rate</mat-icon>
+                <mat-icon>star_rate</mat-icon>
+                <mat-icon>star_rate</mat-icon>
+                <mat-icon>star_rate</mat-icon>
+                <mat-icon>star_rate</mat-icon>
+              </div>
+              <p class="price">175.00</p>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <div class="product-panel">
+      <div class="widget-column">
+        <div class="title">
+          <h4 class="widget-title">Product</h4>
+        </div>
+        <ul class="product-list">
+          <li>
+            <div class="media-image">
+              <a href="">
+                <img src="https://lazeapostolski.com/sophia-ecommerce/assets/images/product/small/headphone1/headphone1.png" alt="">
+              </a>
+            </div>
+            <div class="media-body">
+              <a href="">
+                <span>Product1</span>
+              </a>
+              <div>
+                <mat-icon>star_rate</mat-icon>
+                <mat-icon>star_rate</mat-icon>
+                <mat-icon>star_rate</mat-icon>
+                <mat-icon>star_rate</mat-icon>
+                <mat-icon>star_rate</mat-icon>
+                <mat-icon>star_rate</mat-icon>
+              </div>
+              <p class="price">175.00</p>
+            </div>
+          </li>
+          <li>
+            <div class="media-image">
+              <a href="">
+                <img src="https://lazeapostolski.com/sophia-ecommerce/assets/images/product/small/headphone1/headphone1.png" alt="">
+              </a>
+            </div>
+            <div class="media-body">
+              <a href="">
+                <span>Product1</span>
+              </a>
+              <div>
+                <mat-icon>star_rate</mat-icon>
+                <mat-icon>star_rate</mat-icon>
+                <mat-icon>star_rate</mat-icon>
+                <mat-icon>star_rate</mat-icon>
+                <mat-icon>star_rate</mat-icon>
+                <mat-icon>star_rate</mat-icon>
+              </div>
+              <p class="price">175.00</p>
+            </div>
+          </li>
+          <li>
+            <div class="media-image">
+              <a href="">
+                <img src="https://lazeapostolski.com/sophia-ecommerce/assets/images/product/small/headphone1/headphone1.png" alt="">
+              </a>
+            </div>
+            <div class="media-body">
+              <a href="">
+                <span>Product1</span>
+              </a>
+              <div>
+                <mat-icon>star_rate</mat-icon>
+                <mat-icon>star_rate</mat-icon>
+                <mat-icon>star_rate</mat-icon>
+                <mat-icon>star_rate</mat-icon>
+                <mat-icon>star_rate</mat-icon>
+                <mat-icon>star_rate</mat-icon>
+              </div>
+              <p class="price">175.00</p>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <div class="product-panel">
+      <div class="widget-column">
+        <div class="title">
+          <h4 class="widget-title">Product</h4>
+        </div>
+        <ul class="product-list">
+          <li>
+            <div class="media-image">
+              <a href="">
+                <img src="https://lazeapostolski.com/sophia-ecommerce/assets/images/product/small/headphone1/headphone1.png" alt="">
+              </a>
+            </div>
+            <div class="media-body">
+              <a href="">
+                <span>Product1</span>
+              </a>
+              <div>
+                <mat-icon>star_rate</mat-icon>
+                <mat-icon>star_rate</mat-icon>
+                <mat-icon>star_rate</mat-icon>
+                <mat-icon>star_rate</mat-icon>
+                <mat-icon>star_rate</mat-icon>
+                <mat-icon>star_rate</mat-icon>
+              </div>
+              <p class="price">175.00</p>
+            </div>
+          </li>
+          <li>
+            <div class="media-image">
+              <a href="">
+                <img src="https://lazeapostolski.com/sophia-ecommerce/assets/images/product/small/headphone1/headphone1.png" alt="">
+              </a>
+            </div>
+            <div class="media-body">
+              <a href="">
+                <span>Product1</span>
+              </a>
+              <div>
+                <mat-icon>star_rate</mat-icon>
+                <mat-icon>star_rate</mat-icon>
+                <mat-icon>star_rate</mat-icon>
+                <mat-icon>star_rate</mat-icon>
+                <mat-icon>star_rate</mat-icon>
+                <mat-icon>star_rate</mat-icon>
+              </div>
+              <p class="price">175.00</p>
+            </div>
+          </li>
+          <li>
+            <div class="media-image">
+              <a href="">
+                <img src="https://lazeapostolski.com/sophia-ecommerce/assets/images/product/small/headphone1/headphone1.png" alt="">
+              </a>
+            </div>
+            <div class="media-body">
+              <a href="">
+                <span>Product1</span>
+              </a>
+              <div>
+                <mat-icon>star_rate</mat-icon>
+                <mat-icon>star_rate</mat-icon>
+                <mat-icon>star_rate</mat-icon>
+                <mat-icon>star_rate</mat-icon>
+                <mat-icon>star_rate</mat-icon>
+                <mat-icon>star_rate</mat-icon>
+              </div>
+              <p class="price">175.00</p>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </div>
+   </div>
+
+
+<!-- PRODUCT FOOTER -->

@@ -1,0 +1,187 @@
+
+<div class="container">
+    <mat-card class="example-card">
+      <mat-card-header>
+        <mat-card-title>Registration Form</mat-card-title>
+        <mat-card-subtitle>Complete all fields</mat-card-subtitle>
+      </mat-card-header>
+      <mat-card-content>
+        <form [formGroup]="validateForm">
+  
+          <mat-form-field appearance="outline">
+            <mat-label>NickName</mat-label>
+            <input matInput placeholder="Nickname" type="text"  name="nickname" formControlName="nickname">
+            @if (nickname.invalid && nickname.touched) {
+              <mat-error>{{checkForErrorsIn(nickname,"nickname")}}</mat-error>
+            }
+          </mat-form-field>
+  
+          <mat-form-field appearance="outline">
+            <mat-label>Email</mat-label>
+            <input matInput placeholder="Email" type="email"  name="email" formControlName="email">
+            @if (email.invalid && email.touched) {
+              <mat-error>{{checkForErrorsIn(email,"email")}}</mat-error>
+  
+            }
+          </mat-form-field>
+  
+          <mat-form-field appearance="outline">
+            <mat-label>Password</mat-label>
+            <input matInput [type]="hide1 ? 'password' : 'text'" formControlName="password" >
+  
+            <button mat-icon-button matSuffix (click)="hide1 = !hide1" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide1">
+              <mat-icon>{{hide1 ? 'visibility_off' : 'visibility'}}</mat-icon>
+            </button>
+            @if (password.invalid && password.touched) {
+              <mat-error>{{checkForErrorsIn(password,"password")}}</mat-error>
+            }
+          </mat-form-field>
+  
+          <mat-form-field appearance="outline">
+            <mat-label>Confirm Password</mat-label>
+            <input matInput [type]="hide2 ? 'password' : 'text'" formControlName="checkPassword" >
+            <button mat-icon-button matSuffix (click)="hide2 = !hide2" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide2">
+              <mat-icon>{{hide2 ? 'visibility_off' : 'visibility'}}</mat-icon>
+            </button>
+            @if (checkPassword.invalid && checkPassword.touched) {
+              <mat-error>{{checkForErrorsIn(checkPassword,"checkPassword")}}</mat-error>
+            }
+          </mat-form-field>
+  
+          <button mat-raised-button color="primary" type="submit" [disabled]="validateForm.invalid" (click)="submitForm()">Signup</button>
+  
+        </form>
+      </mat-card-content>
+      <mat-card-actions>
+        <button mat-button>LIKE</button>
+        <button mat-button>SHARE</button>
+      </mat-card-actions>
+    </mat-card>
+  </div>
+  
+  <!--
+  
+  {{name.value}} 
+  <hr>
+  {{email.value}} 
+  <hr>
+  {{name.errors | json}}
+  <hr>
+  {{email.errors | json}} 
+  //formGroup = formUser
+  Inputs: {{formUser.value | json}}
+  <hr>
+  Valor input name: {{formUser.get('name')?.value | json}}
+  <br>
+  Valor input email: {{formUser.controls['email'].value | json}}  //Esta es la forma correcta
+   <hr>
+  {{formUser.controls.email.value | json}}   Otra forma de acceder a los controles
+  <hr> 
+  <hr>
+  Errores de input email: {{formUser.controls.email.errors | json}}   //Esta es la forma correcta para errores
+  <br>
+  Error de input email (validacion: email): {{formUser.controls.email.errors?.['email']}}  
+  <br>
+  Error de input email (validacion: required): {{formUser.controls.email.errors?.['required']}} 
+  <hr>
+  
+  
+  
+  
+  En el class apacere: Esto es para validar el campo
+  ng-invalid: cuando el campo es invalido
+  ng-valid: cuando el campo es valido
+  ng-touched: cuando el campo ha sido tocado
+  ng-untouched: cuando el campo no ha sido tocado
+  ng-pristine: cuando el campo no ha sido modificado
+  ng-dirty: cuando el campo ha sido modificado
+  -->
+  <!-- LISTA DE EVENTOS -->
+  <!-- 
+      (click): cuando se hace click en el elemento+++++
+      (dblclick): cuando se hace doble click en el elemento
+      (keydown): cuando se presiona una tecla+++++++
+      (keyup): cuando se suelta una tecla+++++++
+      (keypress): cuando se presiona una tecla
+      (mouseenter): cuando el mouse entra en el elemento
+      (mouseleave): cuando el mouse sale del elemento
+      (mouseover): cuando el mouse pasa por encima del elemento
+      (mouseout): cuando el mouse sale del elemento
+      (mousemove): cuando el mouse se mueve sobre el elemento
+      (contextmenu): cuando se hace click derecho en el elemento
+      (submit): cuando se envía un formulario+++++++
+      (focus): cuando el elemento recibe el foco
+      (blur): cuando el elemento pierde el foco
+      (change): cuando el valor del elemento cambia
+      (input): cuando el valor del elemento cambia
+      (scroll): cuando se hace scroll en el elemento
+      (resize): cuando se cambia el tamaño del elemento
+      (select): cuando se selecciona texto en el elemento
+      (drag): cuando se arrastra el elemento
+      (dragover): cuando se arrastra un elemento sobre el elemento
+      (drop): cuando se suelta un elemento sobre el elemento
+      (dragleave): cuando se arrastra un elemento fuera del elemento
+      (dragenter): cuando se arrastra un elemento dentro del elemento
+      (dragstart): cuando se empieza a arrastrar un elemento
+      (dragend): cuando se termina de arrastrar un elemento
+      (touchstart): cuando se toca el elemento
+      (touchend): cuando se deja de tocar el elemento
+      (touchmove): cuando se mueve el dedo sobre el elemento
+      (touchcancel): cuando se cancela el toque sobre el elemento
+      (load): cuando se carga el elemento
+      (error): cuando se produce un error en el elemento
+      (animationstart): cuando empieza una animación
+      (animationend): cuando termina una animación
+      (animationiteration): cuando se repite una animación
+      (transitionstart): cuando empieza una transición
+      (transitionend): cuando termina una transición
+      (transitionrun): cuando se ejecuta una transición
+      (reset): cuando se resetea un formulario
+      (toggle): cuando se cambia el estado de un elemento
+      (abort): cuando se aborta la carga de un elemento
+      (canplay): cuando se puede reproducir un elemento
+      (canplaythrough): cuando se puede reproducir un elemento sin interrupciones
+      (durationchange): cuando cambia la duración del elemento
+      (emptied): cuando se vacía el elemento
+      (ended): cuando termina la reproducción del elemento
+      (loadeddata): cuando se ha cargado la información de un elemento
+      (loadedmetadata): cuando se ha cargado la información de un elemento
+      (loadstart): cuando empieza la carga de un elemento
+      (pause): cuando se pausa la reproducción de un elemento
+      (play): cuando se empieza a reproducir un elemento
+      (playing): cuando se empieza a reproducir un elemento
+      (progress): cuando se está descargando un elemento
+      (ratechange): cuando cambia la velocidad de reproducción de un elemento
+      (seeked): cuando se ha terminado de mover la cabeza de reproducción de un elemento
+      (seeking): cuando se está moviendo la cabeza de reproducción de un elemento
+      (stalled): cuando se ha parado la descarga de un elemento
+      (suspend): cuando se ha suspendido la descarga de un elemento
+      (timeupdate): cuando cambia el tiempo de reproducción de un elemento
+      (volumechange): cuando cambia el volumen de un elemento
+      (waiting): cuando se ha parado la reproducción de un elemento
+      (wheel): cuando se mueve la rueda del ratón sobre el elemento
+      (copy): cuando se copia un elemento
+      (cut): cuando se corta un elemento
+      (paste): cuando se pega un elemento
+      (fullscreenchange): cuando se cambia al modo pantalla completa
+      (fullscreenerror): cuando se produce un error al cambiar al modo pantalla completa
+      (pointercancel): cuando se cancela un evento de puntero
+      (pointerdown): cuando se pulsa un botón del ratón o se toca la pantalla
+      (pointerenter): cuando el puntero entra en el elemento
+      (pointerleave): cuando el puntero sale del elemento
+      (pointermove): cuando el puntero se mueve sobre el elemento
+      (pointerout): cuando el puntero sale del elemento
+      (pointerover): cuando el puntero entra en el elemento
+      (pointerup): cuando el puntero se levanta
+      (gotpointercapture): cuando el elemento captura el puntero
+      (lostpointercapture): cuando el elemento pierde la captura del puntero
+      (selectstart): cuando se empieza a seleccionar texto
+      (selectionchange): cuando cambia la selección de texto
+      
+  
+  
+  
+  
+  
+   -->
+  

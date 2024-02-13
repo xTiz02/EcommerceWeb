@@ -1,0 +1,42 @@
+<div class="container">
+    <h1>Update Category</h1>
+    <form [formGroup]="validateForm">
+
+        <div class="file-upload-container">
+            <label for="fileInput" class="file-upload-label">
+                <span>Select a file</span>
+                <input type="file" id="fileInput" accept="image/x-png,image/gif,image/jpeg" (change)="onFileSelected($event)" hidden>
+                <mat-icon>add_a_file</mat-icon>
+            </label>
+            <div *ngIf="selectedFile" class="image-preview">
+                <div class="circle-image">
+                    <img [src]="imagePreview" alt="Existing image select" class="preview-image">
+                </div>
+            </div>
+            <div *ngIf="existingImage" class="image-preview">
+                <div class="circle-image">
+                    <img [src]="imageUrl" alt="Selected image" class="preview-image">
+                </div>
+            </div>
+        </div>
+        
+        <mat-form-field appearance="outline" class="form-field">
+            <mat-label>Name</mat-label>
+            <input matInput placeholder="Name" type="text" formControlName="name">
+             @if (name.invalid && name.touched) {
+                <mat-error>{{checkForErrorsIn(name,"name")}}</mat-error>
+            }
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="form-field">
+            <mat-label>Description</mat-label>
+            <input matInput type="text" placeholder="Description" formControlName="description" >
+            @if (description.invalid && description.touched) {
+                <mat-error>{{checkForErrorsIn(description,"description")}}</mat-error>
+            }
+        </mat-form-field>
+
+        <button mat-raised-button color="primary" type="submit" [disabled]="validateForm.invalid" (click)="updateCategory()">Post</button>
+    </form>
+</div>
+

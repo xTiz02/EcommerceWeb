@@ -1,0 +1,103 @@
+<!-- <mat-toolbar color="primary" class="navbar">
+    <button mat-button routerLink='{{logoLink[1]}}' routerLinkActive='{{logoLink[2]}}'class="navbar-brand">{{logoLink[0]}}</button>
+    <span class="spacer"></span>
+    @for (item of rutas; track item.path) {
+      <button mat-button [routerLink]='item.path' [routerLinkActive]='item.active' class="navbar-item">{{item.title}}</button>
+    }
+    
+    <button mat-button (click)="logout()" >Logout</button>
+    
+</mat-toolbar>
+<router-outlet></router-outlet> -->
+
+<mat-sidenav-container class="container">
+  <mat-sidenav #sidebar mode='side'>
+    <div class="navbar">
+      <div class="top">
+          <mat-icon [inline]='true'>notifications_none</mat-icon>
+      </div>
+      <div class="user">
+          <img src="https://t3.ftcdn.net/jpg/05/53/79/60/360_F_553796090_XHrE6R9jwmBJUMo9HKl41hyHJ5gqt9oz.jpg" alt="">
+          <h4 class="name">Role: Admin</h4>
+          <p class="mail">admingmail.com</p>
+      </div>
+      <div class="menu">
+          <div class="menu-head">
+              <span>dashboard</span>
+          </div>
+          <div class="menu-item">
+              <button mat-button class="menu-button" [routerLink]="['/dashboard']">
+                  <span>Home</span>
+              </button>
+              <button mat-button class="menu-button" [routerLink]="['/posts']">
+                  <span>Posts</span>
+              </button>
+              <button mat-button class="menu-button">
+                  <span>Comments</span>
+              </button>
+              <button mat-button class="menu-button">
+                  <span>Pages</span>
+              </button>
+              <button mat-button class="menu-button">
+                  <span>Settings</span>
+              </button>
+          </div>
+      </div>
+  </div>
+  </mat-sidenav>
+  <mat-sidenav-content >
+      <div class="content">
+          <div class="toolbar" >
+              <mat-toolbar style="background-color: rgb(229, 228, 228);">
+                  <div>
+                    <mat-icon class="tool" (click)="sidebar.toggle()">menu</mat-icon>
+                  </div>
+                  <div>
+                    <h3 class="title">App-Prueba</h3>
+                  </div>
+                  
+                  <div class="box">
+                    <button mat-button *ngIf="screenSize1" [routerLink]="'/admin/dashboard'">
+                      <mat-icon>dashboard</mat-icon>
+                      <span>Dashboard</span>
+                    </button>
+                    <button mat-button  [matMenuTriggerFor]="menuProduct" *ngIf="screenSize1" >
+                      <mat-icon>local_mall</mat-icon>
+                      <span>Products</span>
+                    </button>
+                    <mat-menu #menuProduct="matMenu">
+                      <button mat-menu-item [routerLink]="'/admin/product'" >New</button>
+                      <button mat-menu-item [routerLink]="'/admin/products'">View</button>
+                    </mat-menu>
+                    <button mat-button  [matMenuTriggerFor]="menuCategory" *ngIf="screenSize2">
+                      <mat-icon>local_offer</mat-icon>
+                      <span>Categories</span>
+                    </button>
+                    <mat-menu #menuCategory="matMenu">
+                      <button mat-menu-item [routerLink]="'/admin/category'">New</button>
+                      <button mat-menu-item [routerLink]="'/admin/categories'">View</button>
+                    </mat-menu>
+                    <button mat-button *ngIf="screenSize2">
+                      <mat-icon>attach_money</mat-icon>
+                      <span>Orders</span>
+                    </button>
+                    <button mat-button *ngIf="screenSize3">
+                      <mat-icon>layers</mat-icon>
+                      <span>Post Coupon</span>
+                    </button>
+                    <button mat-button *ngIf="screenSize3">
+                      <mat-icon>style</mat-icon>
+                      <span>Coupons</span>
+                    </button>
+                    <button mat-stroked-button (click)="logout()" color="warn">
+                      <span style="color: rgb(255, 0, 0); margin-left: 5px;">Logout</span>
+                    </button>
+                  </div>
+              </mat-toolbar>
+          </div>
+          <div class="main">
+              <router-outlet></router-outlet>
+          </div>
+      </div>
+  </mat-sidenav-content>
+</mat-sidenav-container>

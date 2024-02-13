@@ -1,0 +1,123 @@
+<div class="container">
+    <h2>Post Product Form</h2>
+    <form [formGroup]="validateForm">
+
+        <div class="file-upload-container">
+            <label for="fileInput" class="file-upload-label">
+                <span>Select a file</span>
+                <input type="file" id="fileInput" accept="image/x-png,image/gif,image/jpeg,image/webp" multiple (change)="onFileSelected($event)" hidden>
+                <mat-icon>add_a_file</mat-icon>
+            </label>
+            
+                
+            
+            @if (selectedFiles) {
+                
+                <mat-radio-group aria-labelledby="example-radio-group-label" class="image-preview-container" 
+                formControlName="principalImage">
+                    @for (item of imagesPreview; track $index) {
+                        <div class="image-preview">
+                            <h4 style="font-weight: 100;">{{ $index+1+')'}} </h4>
+                            <div class="circle-image">
+                                <img [src]="item" alt="Selected image" class="preview-image">
+                            </div>
+                            <mat-radio-button class="example-radio-button" [value]="selectedFiles[$index].name"></mat-radio-button>
+                        </div>
+                        
+                        
+                        
+                    }
+                </mat-radio-group>
+                
+            }
+            @if (principalImage.value) {
+                <span style="margin-top: 30px; text-align: center;">Imagen principal: {{principalImage.value}}</span>
+            }@else {
+               <span style="margin-top: 30px; text-align: center;">Nota: La primera imagen sera la principal.</span> 
+            }
+            
+        </div>
+        <div class="container1">
+            <mat-form-field appearance="outline" class="form-field">
+                <mat-label>Select Category</mat-label>
+                <mat-select formControlName="categoryId" name="categoryId">
+                    <mat-option *ngFor="let category of listCategories" [value]="category.id">
+                        {{category.name}}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+            <mat-form-field appearance="outline" class="form-field">
+                <mat-label>Price</mat-label>
+                <input matInput type="number" placeholder="Price" formControlName="price" >
+                @if (price.invalid && price.touched) {
+                    <mat-error>{{checkForErrorsIn(price,"price")}}</mat-error>
+                }
+            </mat-form-field>
+        </div>
+        <!-- <div class="container2">
+            <mat-form-field appearance="outline" class="form-field">
+                <mat-label>Color(Optional)</mat-label>
+                <mat-select formControlName="color" name="color">
+                <mat-option [value]="null">None</mat-option>
+                <mat-option value="red">Reed</mat-option>
+                <mat-option value="blue">Blue</mat-option>
+                <mat-option value="green">green</mat-option>
+                <mat-option value="yellow">Yellow</mat-option>
+                </mat-select>
+            </mat-form-field>
+
+
+           
+
+            <mat-form-field appearance="outline" class="form-field">
+                <mat-label >OtherPrice(Optional)</mat-label>
+                <input matInput type="number"formControlName="priceModifier" >
+                @if (priceModifier.invalid && priceModifier.touched) {
+                    <mat-error>{{checkForErrorsIn(priceModifier,"priceModifier")}}</mat-error>
+                }
+            </mat-form-field>
+        </div> -->
+         <mat-form-field appearance="outline" class="form-field">
+                <mat-label>Stock</mat-label>
+                <input matInput type="number" placeholder="Stock" formControlName="stock" >
+                @if (stock.invalid && stock.touched) {
+                    <mat-error>{{checkForErrorsIn(stock,"stock")}}</mat-error>
+                }
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="form-field">
+            <mat-label>Name</mat-label>
+            <input matInput type="text" placeholder="Name" formControlName="name" >
+            @if (name.invalid && name.touched) {
+                <mat-error>{{checkForErrorsIn(name,"name")}}</mat-error>
+            }
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="form-field">
+            <mat-label>Characteristics</mat-label>
+            <textarea matInput type="text" placeholder="Characteristics" formControlName="characteristics" > </textarea>
+            @if (characteristics.invalid && characteristics.touched) {
+                <mat-error>{{checkForErrorsIn(description,"characteristics")}}</mat-error>
+            }
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="form-field">
+            <mat-label>Specifications</mat-label>
+            <textarea matInput type="text" placeholder="Specifications" formControlName="specifications" ></textarea>
+            @if (specifications.invalid && specifications.touched) {
+                <mat-error>{{checkForErrorsIn(description,"specifications")}}</mat-error>
+            }
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="form-field">
+            <mat-label>Description</mat-label>
+            <textarea matInput type="text" placeholder="Description" formControlName="description" > </textarea>
+            @if (description.invalid && description.touched) {
+                <mat-error>{{checkForErrorsIn(description,"description")}}</mat-error>
+            }
+        </mat-form-field>
+        
+        <button mat-raised-button color="primary" type="submit" [disabled]="validateForm.invalid" (click)="addProduct()">Post</button>
+    </form>
+</div>
+

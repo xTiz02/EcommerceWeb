@@ -1,0 +1,49 @@
+
+.products-wrapper-prueba{
+    display: flex;
+    flex-flow: wrap; 
+    flex-direction: row;
+    box-sizing: border-box; 
+    mat-icon{
+        background-repeat: no-repeat;
+        display: inline-block;
+        fill: currentColor;
+        height: 24px;
+        width: 24px;
+        transition: all .2s ease-in-out;
+    }
+    mat-icon:hover{
+        //agrandar icono con transition lenta al agrandar y desagrandar
+        transform: scale(1.2);
+    }
+} 
+.product-box-prueba{
+    flex: 1 1 25%;
+    box-sizing: border-box;
+    max-width: 25%;
+    padding: 9px 0;
+}
+@media (min-width: 1000px){ 
+    .product-box-prueba{
+        flex: 1 1 25%;
+        max-width: 25%;
+    }
+}
+@media (min-width: 600px) and (max-width: 1000px){
+    .product-box-prueba{
+        flex: 1 1 50%;
+        max-width: 50%;
+    }
+}
+@media (max-width: 600px){ 
+    .product-box-prueba{
+        flex: 1 1 100%;
+        max-width: 100%;
+    }
+}
+
+
+// .mat-mdc-dialog-container, .mat-mdc-dialog-container .mdc-dialog__container, .mat-mdc-dialog-container .mdc-dialog__surface{
+//     overflow: hidden!important;
+// }
+

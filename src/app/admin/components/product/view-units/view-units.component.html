@@ -1,0 +1,28 @@
+<div class="products-wrapper">
+    <h2>Variant list</h2>
+    <button mat-raised-button color="primary" class="add-button" routerLink="/admin/product/{{productId}}/unit">Add Variant</button>
+    @for (productUnit of pageListProductsUnits; track $index) {
+    <div class="product-box" >
+        <div class="product-item">
+            <mat-card class="card" >
+                <div class="product-info-wrapper">
+                    <span class="category">Stock: {{productUnit.stock}}</span>
+                    <mat-divider></mat-divider>
+                    <div class="title-wrap" style="margin-top: 12px;"><h4 style="text-align: center;">Color: {{productUnit.color}}</h4></div>
+                    <div class="price-wrap">
+                        <span style="text-align: center;">Price: {{productUnit.priceModifier}}</span>
+                        <mat-slide-toggle class="category" [checked]="productUnit.enabled" (change)="changeStatusProduct(productUnit.id, $event)">Enabled</mat-slide-toggle>
+                    </div>
+                    <mat-divider></mat-divider>
+                    <div class="actions">
+                        <button mat-raised-button color="primary" class="update-button" >FAQ</button>
+                        <button mat-raised-button color="accent" class="update-button" routerLink="/admin/product/{{productId}}/unit/{{productUnit.id}}">Update</button>
+                        <button mat-raised-button color="warn" class="delete-button">Delete</button>
+                    </div>
+                </div>
+                
+            </mat-card>
+        </div>
+    </div>
+    }
+</div>

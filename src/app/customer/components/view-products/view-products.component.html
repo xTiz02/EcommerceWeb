@@ -1,0 +1,114 @@
+<div class="single-category">
+    <div class="container">
+        <div class="wrapper">
+            <div class="column">
+                <div class="holder">
+                    <div class="row sidebar">
+                        <form class="filter" [formGroup]="validationForm">
+                            <div class="filter-block">
+                                <h4>Category</h4>
+                                <ul>
+                                    @for (category of listCategories; track $index) {
+                                        <li>
+                                            <mat-checkbox color="primary" (change)="toggleSelection(category.id,'category')">{{category.name}}</mat-checkbox>
+                                            <span class="count">{{category.countProducts}}</span>
+                                        </li>
+                                    }
+                                    
+                                </ul>
+                            </div>
+                            <div class="filter-block">
+                                <h4>Color</h4>
+                                <ul>
+                                    @for (color of listColors; track $index) {
+                                        <li>
+                                            <mat-checkbox color="primary" (change)="toggleSelection(color.name,'color')">{{color.name}}</mat-checkbox>
+                                            <span class="count">15</span>
+                                        </li>
+                                    }   
+                                </ul>
+                            </div>
+                            <div class="filter-block pricing">
+                                <h4>Price($)</h4>
+                                <div class="byprice">
+                                    <div class="range-track">
+                                        <mat-slider style="width: 100%;"
+                                            class="example-margin"
+                                            [disabled]="disabled"
+                                            [max]="max"
+                                            [min]="min"
+                                            [step]="step"
+                                            [discrete]="thumbLabel"
+                                            color="primary">
+                                            <input matSliderThumb  #slider formControlName="menorDe">
+                                        </mat-slider>
+                                    </div>
+                                    <div class="price-range">
+                                        <mat-form-field style="width:100px" >
+                                            <mat-label>Greater than</mat-label>
+                                            <input type="number" matInput class="price-form" formControlName="mayorDe">
+                                        </mat-form-field>
+                                        <mat-form-field style="width:100px">
+                                            <mat-label>Less than</mat-label>
+                                            <input type="number" matInput class="price-form" [value]="slider.value">
+                                        </mat-form-field>
+                                    </div>
+                                </div>
+                                <div class="btn-filter">
+                                    <button mat-button (click)="submitFilter()">Filter</button>
+                                </div>
+                                
+                            </div>
+                            
+                            <div class="slider">
+                                <mat-accordion>
+                                    <mat-expansion-panel (opened)="panelOpenState = true"
+                                                        (closed)="panelOpenState = false">
+                                    <mat-expansion-panel-header>
+                                        <mat-panel-title>
+                                        <span>Sorting By</span>
+                                        </mat-panel-title>
+                                    </mat-expansion-panel-header>
+                                    <mat-list role="list">
+                                        <mat-list-item role="listitem"><a routerLink="/customer/home">Show All</a></mat-list-item>
+                                        <mat-list-item role="listitem"><a routerLink="/customer/home">Show All</a></mat-list-item>
+                                        <mat-list-item role="listitem"><a routerLink="/customer/home">Show All</a></mat-list-item>
+                                    </mat-list>
+                                    </mat-expansion-panel>
+                                </mat-accordion>
+                            </div>
+                        </form>
+                        
+                    </div>
+                    <div class="section">
+                        <div class="filter-row">
+                            <mat-form-field>
+                                <input matInput>
+                                <mat-label>Search product</mat-label>
+                                <mat-icon matSuffix>mode_edit</mat-icon>
+                            </mat-form-field>
+                        </div>
+                        <div class="products-wrapper-prueba">
+                            @for (product of productListView; track $index) {
+                                <app-product-card [product]="product" class="product-box-prueba"></app-product-card>
+                            }
+                          
+                        </div>
+                        <mat-paginator #paginator
+               class="demo-paginator"
+               (page)="handlePageEvent($event)"
+               [length]="length"
+               [pageSize]="pageSize"
+               [disabled]="disabled"
+               [showFirstLastButtons]="false"
+               [pageSizeOptions]="showPageSizeOptions ? pageSizeOptions : []"
+               [hidePageSize]="true"
+               [pageIndex]="pageIndex"
+               aria-label="Select page">
+</mat-paginator>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

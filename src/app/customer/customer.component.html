@@ -1,0 +1,217 @@
+
+<mat-sidenav-container class="example-container" [hasBackdrop]="hasBackdrop.value">
+    <mat-sidenav #sidenav [mode]="mode.value!" [position]="position.value!">
+        <button mat-button color="warn" class="close-btn" (click)="sidenav.toggle()">
+            <mat-icon >close</mat-icon>
+        </button>
+        <mat-divider class="divider"></mat-divider>
+        <div class="sidebar-item">
+          <mat-accordion>
+            <mat-expansion-panel (opened)="panelOpenState = true"
+                                (closed)="panelOpenState = false">
+              <mat-expansion-panel-header>
+                <mat-panel-title>
+                  <span class="title-sidebar-item">Home</span>
+                  <span style="width: 80px;"></span>
+                </mat-panel-title>
+              </mat-expansion-panel-header>
+              <mat-list role="list">
+                <mat-list-item role="listitem">Item 1</mat-list-item>
+                <mat-list-item role="listitem">Item 2</mat-list-item>
+                <mat-list-item role="listitem">Item 3</mat-list-item>
+              </mat-list>
+            </mat-expansion-panel>
+          </mat-accordion>
+          <mat-accordion>
+            <mat-expansion-panel (opened)="panelOpenState = true"
+                                (closed)="panelOpenState = false">
+              <mat-expansion-panel-header>
+                <mat-panel-title>
+                  <span class="title-sidebar-item">Products</span>
+                </mat-panel-title>
+              </mat-expansion-panel-header>
+              <mat-list role="list">
+                <mat-list-item role="listitem">Item 1</mat-list-item>
+                <mat-list-item role="listitem">Item 2</mat-list-item>
+                <mat-list-item role="listitem">Item 3</mat-list-item>
+              </mat-list>
+            </mat-expansion-panel>
+          </mat-accordion>
+          <mat-accordion>
+            <mat-expansion-panel (opened)="panelOpenState = true"
+                                (closed)="panelOpenState = false">
+              <mat-expansion-panel-header>
+                <mat-panel-title>
+                  <span class="title-sidebar-item">Contact</span>
+                </mat-panel-title>
+              </mat-expansion-panel-header>
+              <mat-list role="list">
+                <mat-list-item role="listitem">Item 1</mat-list-item>
+                <mat-list-item role="listitem">Item 2</mat-list-item>
+                <mat-list-item role="listitem">Item 3</mat-list-item>
+              </mat-list>
+            </mat-expansion-panel>
+          </mat-accordion>
+          <mat-accordion>
+            <mat-expansion-panel (opened)="panelOpenState = true"
+                                (closed)="panelOpenState = false">
+              <mat-expansion-panel-header>
+                <mat-panel-title>
+                  <span class="title-sidebar-item">Cupons</span>
+                </mat-panel-title>
+              </mat-expansion-panel-header>
+              <mat-list role="list">
+                <mat-list-item role="listitem">Item 1</mat-list-item>
+                <mat-list-item role="listitem">Item 2</mat-list-item>
+                <mat-list-item role="listitem">Item 3</mat-list-item>
+              </mat-list>
+            </mat-expansion-panel>
+          </mat-accordion>
+        </div>
+        
+    </mat-sidenav>
+    
+    <mat-sidenav-content>
+      <mat-toolbar class="main-topbar">
+        <mat-toolbar-row class="container-toolbar">
+          <button mat-button (click)="sidenav.toggle()" class="toggle"><mat-icon>menu</mat-icon></button>
+          <div class="container-left-nav">
+            <div class="widget-text">
+              <button mat-button [matMenuTriggerFor]="menu">Menu</button>
+              <mat-menu #menu="matMenu">
+                <button mat-menu-item>Item 1</button>
+                <button mat-menu-item>Item 2</button>
+              </mat-menu>
+            </div>
+            <div class="widget-text">
+              <button mat-button [matMenuTriggerFor]="menu">Menu</button>
+              <mat-menu #menu="matMenu">
+                <button mat-menu-item>Item 1</button>
+                <button mat-menu-item>Item 2</button>
+              </mat-menu>
+            </div>
+          </div>
+          <div class="container-right-nav">
+            <div class="widget-text">
+              <a>
+                <mat-icon>
+                  favorite_border
+                </mat-icon>
+                FAVORITE
+              </a>
+            </div>
+            <div class="widget-text">
+              <a routerLink="/login">
+                <mat-icon>
+                  person_outline
+                </mat-icon>
+                LOGIN
+              </a>
+            </div>
+            <div class="widget-text">
+              <a routerLink="/signup">
+                <mat-icon>
+                  person_add
+                </mat-icon>
+                REGISTER
+              </a>
+            </div>
+          </div>
+        </mat-toolbar-row>
+      </mat-toolbar>
+      <div>
+        <div class="home-header">
+          <mat-toolbar class="kuro">
+            <mat-toolbar-row >
+              <div class="logo">
+                <a routerLink="/customer/home">
+                  <img src="https://res.cloudinary.com/djpgpybb0/image/upload/v1707244048/czcuzao20f970urbggss.png" alt="logo" class="logo-img">
+                </a>
+              </div>
+              <div class="search">
+                <form class="search-form">
+                  <div class="form-wrap">
+                    <input matInput placeholder="Search">
+                    <button  matSuffix  aria-label="Search">
+                      <mat-icon>search</mat-icon>
+                    </button>
+                </div>
+                </form>
+                
+              </div>
+              <div class="call-buckep-wrap">
+                <div class="info-message-icon">
+                  <div class="icon">
+                    <mat-icon>
+                      call
+                    </mat-icon>
+                  </div>
+                  <div class="info-text">
+                    <p>Helpline:</p>
+                    <span>(+51)912 258 575</span>
+                  </div>
+                </div>
+                <div class="main-menu-wraper-2">
+                  <div class="car">
+                    <mat-icon>
+                      local_grocery_store
+                    </mat-icon>
+                    <span>3</span>
+                  </div>
+                  <div class="price">
+                    <span>$1030</span>
+                  </div>
+                </div>
+              </div>
+            </mat-toolbar-row>
+          </mat-toolbar>
+        </div>
+        <div class="menu-container">
+          <mat-toolbar-row class="container-toolbar">
+            <div class="main-menu">
+              <div>
+                <button mat-button routerLink="/customer/view-products">Products</button>
+              </div>
+              <div>
+                <button mat-button [matMenuTriggerFor]="menu1" fragment>Categories</button>
+                <mat-menu #menu1="matMenu">
+                  @for (category of listCategories; track $index) {
+                    <button mat-menu-item>{{category.name}}</button>
+                  }
+                </mat-menu>
+              </div>
+              <div>
+                <button mat-button [matMenuTriggerFor]="menu2">Contact</button>
+                <mat-menu #menu2="matMenu">
+                  <button mat-menu-item>Item 1</button>
+                  <button mat-menu-item>Item 2</button>
+                </mat-menu>
+              </div>
+              <div>
+                <button mat-button [matMenuTriggerFor]="menu3">Coupons</button>
+                <mat-menu #menu3="matMenu">
+                  <button mat-menu-item>Item 1</button>
+                  <button mat-menu-item>Item 2</button>
+                </mat-menu>
+              </div>
+              <div>
+                <button mat-button [matMenuTriggerFor]="menu4" routerLink="/customer/dashboard">Dashboard</button>
+                <mat-menu #menu4="matMenu">
+                  <button mat-menu-item>Item 1</button>
+                  <button mat-menu-item>Item 2</button>
+                </mat-menu>
+              </div>
+            </div>
+          </mat-toolbar-row>
+        </div>
+      </div>
+      <router-outlet></router-outlet>
+    </mat-sidenav-content>
+  </mat-sidenav-container>
+  
+  
+  
+
+
+
+

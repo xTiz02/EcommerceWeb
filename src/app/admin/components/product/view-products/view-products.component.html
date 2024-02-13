@@ -1,0 +1,350 @@
+<form [formGroup]="searchForm" class="search-form" (submit)="submitForm()">
+    <mat-form-field appearance="outline" class="search-input"> 
+        <mat-label>Search</mat-label>
+        <input matInput formControlName="title" (change)="changeTitleForm($event)">
+        <button mat-button matSuffix color="primary" [disabled]="searchForm.invalid">
+            <mat-icon>search</mat-icon>
+        </button>
+    </mat-form-field>
+</form>
+<div style="text-align: center;">
+    <span *ngIf="!noProducts" style="font-weight: 100; text-align: center;">Note: Click in the product to add other variant.</span>
+</div>
+
+
+<div class="products-wrapper" *ngIf="!noProducts">
+    <div class="product-box" *ngFor="let product of pageListProducts">
+        <div class="product-item">
+            <mat-card class="card" >
+                <div class="product-img">
+                    <a class="product-link" (click)="redirectToUnits(product.id)">
+                        <img [src]="product.principalUrl" alt="product image">
+                    </a>
+                </div>
+                <div class="product-info-wrapper">
+                    <span class="category">Category: {{product.categoryName}}</span>
+                    <span class="category">Date: {{product.createdAt}}</span>
+                    <mat-divider></mat-divider>
+                    <div class="title-wrap" style="margin-top: 12px;"><h4 style="text-align: center;">{{product.name}}</h4></div>
+                    <div class="price-wrap">
+                        <span>Price: ${{product.price}}</span>
+                        <mat-slide-toggle [checked]="product.enabled" (change)="changeStatusProduct(product.id, $event)">Enabled</mat-slide-toggle>
+                    </div>
+                    <mat-divider></mat-divider>
+                    <div class="actions">
+                        <button mat-raised-button color="primary" class="update-button" routerLink="/admin/faq/{{product.id}}">FAQ</button>
+                        <button mat-raised-button color="accent" class="update-button" routerLink="/admin/product/{{product.id}}">Update</button>
+                        <button mat-raised-button color="warn" class="delete-button" (click)="deleteProduct(product.id)">Delete</button>
+                    </div>
+                </div>
+                
+            </mat-card>
+        </div>
+    </div>
+</div>
+
+
+<div class="error-container" *ngIf="noProducts">
+    <h1 class="error-title">Category Not Found</h1>
+    <p class="error-message">We're sorry, but the category you are looking for does not exist.</p>
+    <button mat-raised-button class="back-button" (click)="goBack()">Go Back</button>
+</div>
+<mat-paginator #paginator
+               class="demo-paginator"
+               (page)="handlePageEvent($event)"
+               [length]="length"
+               [pageSize]="pageSize"
+               [disabled]="disabled"
+               [showFirstLastButtons]="showFirstLastButtons"
+               [pageSizeOptions]="showPageSizeOptions ? pageSizeOptions : []"
+               [hidePageSize]="hidePageSize"
+               [pageIndex]="pageIndex"
+               aria-label="Select page">
+</mat-paginator>
+
+
+<!-- 
+<div class="products-wrapper-prueba">
+    <div class="product-box-prueba">
+        <div class="product-item-prueba">
+            <mat-card class="card-prueba">
+                <div class="product-img-prueba">
+                    <a class="product-link-prueba">
+                        <img src="https://lazeapostolski.com/sophia-ecommerce/assets/images/product/small/headphone1/headphone1.png" alt="">
+                    </a>
+                    <div class="icons">
+                        <a><mat-icon>favorite_border</mat-icon></a>
+                        <a><mat-icon>remove_red_eye</mat-icon></a>
+                        <a><mat-icon>cached</mat-icon></a>
+                    </div>
+                </div>
+                <div class="product-info-wrapper-prueba">
+                    <span class="category-prueba">Headphones</span>
+                    <div class="title-wrap-prueba"><h4>ONTEC E Headset</h4></div>
+                    <div class="stars-prueba">
+                        <mat-icon>star_rate</mat-icon>
+                        <mat-icon>star_rate</mat-icon>
+                        <mat-icon>star_rate</mat-icon>
+                        <mat-icon>star_rate</mat-icon>
+                        <mat-icon>star_rate</mat-icon>
+                    </div>
+                    <div class="price-wrap-prueba">
+                        <p>$175.00</p>
+                        <a><mat-icon>shopping_cart</mat-icon></a>
+                    </div>
+                </div>
+            </mat-card>
+        </div>
+    </div>
+    <div class="product-box-prueba">
+        <div class="product-item-prueba">
+            <mat-card class="card-prueba">
+                <div class="product-img-prueba">
+                    <a class="product-link-prueba">
+                        <img src="https://lazeapostolski.com/sophia-ecommerce/assets/images/product/small/headphone1/headphone1.png" alt="">
+                    </a>
+                    <div class="icons">
+                        <a><mat-icon>favorite_border</mat-icon></a>
+                        <a><mat-icon>remove_red_eye</mat-icon></a>
+                        <a><mat-icon>cached</mat-icon></a>
+                    </div>
+                    </div>
+                <div class="product-info-wrapper-prueba">
+                    <span class="category-prueba">Headphones</span>
+                    <div class="title-wrap-prueba"><h4>ONTEC E Headset</h4></div>
+                    <div class="stars-prueba">
+                        <mat-icon>star_rate</mat-icon>
+                        <mat-icon>star_rate</mat-icon>
+                        <mat-icon>star_rate</mat-icon>
+                        <mat-icon>star_rate</mat-icon>
+                        <mat-icon>star_rate</mat-icon>
+                    </div>
+                    <div class="price-wrap-prueba">
+                        <p>$175.00</p>
+                        <a><mat-icon>shopping_cart</mat-icon></a>
+                    </div>
+                </div>
+            </mat-card>
+        </div>
+    </div>
+    <div class="product-box-prueba" >
+        <div class="product-item-prueba">
+            <mat-card class="card-prueba">
+                <div class="product-img-prueba">
+                    <a class="product-link-prueba">
+                        <img src="https://lazeapostolski.com/sophia-ecommerce/assets/images/product/small/headphone1/headphone1.png" alt="">
+                    </a>
+                    <div class="icons">
+                        <a><mat-icon>favorite_border</mat-icon></a>
+                        <a><mat-icon>remove_red_eye</mat-icon></a>
+                        <a><mat-icon>cached</mat-icon></a>
+                    </div>
+                    </div>
+                <div class="product-info-wrapper-prueba">
+                    <span class="category-prueba">Headphones</span>
+                    <div class="title-wrap-prueba"><h4>ONTEC E Headset</h4></div>
+                    <div class="stars-prueba">
+                        <mat-icon>star_rate</mat-icon>
+                        <mat-icon>star_rate</mat-icon>
+                        <mat-icon>star_rate</mat-icon>
+                        <mat-icon>star_rate</mat-icon>
+                        <mat-icon>star_rate</mat-icon>
+                    </div>
+                    <div class="price-wrap-prueba">
+                        <p>$175.00</p>
+                        <a><mat-icon>shopping_cart</mat-icon></a>
+                    </div>
+                </div>
+            </mat-card>
+        </div>
+    </div>
+    <div class="product-box-prueba">
+        <div class="product-item-prueba">
+            <mat-card class="card-prueba">
+                <div class="product-img-prueba">
+                    <a class="product-link-prueba">
+                        <img src="https://lazeapostolski.com/sophia-ecommerce/assets/images/product/small/headphone1/headphone1.png" alt="">
+                    </a>
+                    <div class="icons">
+                        <a><mat-icon>favorite_border</mat-icon></a>
+                        <a><mat-icon>remove_red_eye</mat-icon></a>
+                        <a><mat-icon>cached</mat-icon></a>
+                    </div>
+                    </div>
+                <div class="product-info-wrapper-prueba">
+                    <span class="category-prueba">Headphones</span>
+                    <div class="title-wrap-prueba"><h4>ONTEC E Headset</h4></div>
+                    <div class="stars-prueba">
+                        <mat-icon>star_rate</mat-icon>
+                        <mat-icon>star_rate</mat-icon>
+                        <mat-icon>star_rate</mat-icon>
+                        <mat-icon>star_rate</mat-icon>
+                        <mat-icon>star_rate</mat-icon>
+                    </div>
+                    <div class="price-wrap-prueba">
+                        <p>$175.00</p>
+                        <a><mat-icon>shopping_cart</mat-icon></a>
+                    </div>
+                </div>
+            </mat-card>
+        </div>
+    </div>
+    <div class="product-box-prueba">
+        <div class="product-item-prueba">
+            <mat-card class="card-prueba">
+                <div class="product-img-prueba">
+                    <a class="product-link-prueba">
+                        <img src="https://lazeapostolski.com/sophia-ecommerce/assets/images/product/small/headphone1/headphone1.png" alt="">
+                    </a>
+                    <div class="icons">
+                        <a><mat-icon>favorite_border</mat-icon></a>
+                        <a><mat-icon>remove_red_eye</mat-icon></a>
+                        <a><mat-icon>cached</mat-icon></a>
+                    </div>
+                    </div>
+                <div class="product-info-wrapper-prueba">
+                    <span class="category-prueba">Headphones</span>
+                    <div class="title-wrap-prueba"><h4>ONTEC E Headset</h4></div>
+                    <div class="stars-prueba">
+                        <mat-icon>star_rate</mat-icon>
+                        <mat-icon>star_rate</mat-icon>
+                        <mat-icon>star_rate</mat-icon>
+                        <mat-icon>star_rate</mat-icon>
+                        <mat-icon>star_rate</mat-icon>
+                    </div>
+                    <div class="price-wrap-prueba">
+                        <p>$175.00</p>
+                        <a><mat-icon>shopping_cart</mat-icon></a>
+                    </div>
+                </div>
+            </mat-card>
+        </div>
+    </div>
+    <div class="product-box-prueba">
+        <div class="product-item-prueba">
+            <mat-card class="card-prueba">
+                <div class="product-img-prueba">
+                    <a class="product-link-prueba">
+                        <img src="https://lazeapostolski.com/sophia-ecommerce/assets/images/product/small/headphone1/headphone1.png" alt="">
+                    </a>
+                    <div class="icons">
+                        <a><mat-icon>favorite_border</mat-icon></a>
+                        <a><mat-icon>remove_red_eye</mat-icon></a>
+                        <a><mat-icon>cached</mat-icon></a>
+                    </div>
+                    </div>
+                <div class="product-info-wrapper-prueba">
+                    <span class="category-prueba">Headphones</span>
+                    <div class="title-wrap-prueba"><h4>ONTEC E Headset</h4></div>
+                    <div class="stars-prueba">
+                        <mat-icon>star_rate</mat-icon>
+                        <mat-icon>star_rate</mat-icon>
+                        <mat-icon>star_rate</mat-icon>
+                        <mat-icon>star_rate</mat-icon>
+                        <mat-icon>star_rate</mat-icon>
+                    </div>
+                    <div class="price-wrap-prueba">
+                        <p>$175.00</p>
+                        <a><mat-icon>shopping_cart</mat-icon></a>
+                    </div>
+                </div>
+            </mat-card>
+        </div>
+    </div>
+    <div class="product-box-prueba">
+        <div class="product-item-prueba">
+            <mat-card class="card-prueba">
+                <div class="product-img-prueba">
+                    <a class="product-link-prueba">
+                        <img src="https://lazeapostolski.com/sophia-ecommerce/assets/images/product/small/headphone1/headphone1.png" alt="">
+                    </a>
+                    <div class="icons">
+                        <a><mat-icon>favorite_border</mat-icon></a>
+                        <a><mat-icon>remove_red_eye</mat-icon></a>
+                        <a><mat-icon>cached</mat-icon></a>
+                    </div>
+                    </div>
+                <div class="product-info-wrapper-prueba">
+                    <span class="category-prueba">Headphones</span>
+                    <div class="title-wrap-prueba"><h4>ONTEC E Headset</h4></div>
+                    <div class="stars-prueba">
+                        <mat-icon>star_rate</mat-icon>
+                        <mat-icon>star_rate</mat-icon>
+                        <mat-icon>star_rate</mat-icon>
+                        <mat-icon>star_rate</mat-icon>
+                        <mat-icon>star_rate</mat-icon>
+                    </div>
+                    <div class="price-wrap-prueba">
+                        <p>$175.00</p>
+                        <a><mat-icon>shopping_cart</mat-icon></a>
+                    </div>
+                </div>
+            </mat-card>
+        </div>
+    </div>
+    <div class="product-box-prueba">
+        <div class="product-item-prueba">
+            <mat-card class="card-prueba">
+                <div class="product-img-prueba">
+                    <a class="product-link-prueba">
+                        <img src="https://lazeapostolski.com/sophia-ecommerce/assets/images/product/small/headphone1/headphone1.png" alt="">
+                    </a>
+                    <div class="icons">
+                        <a><mat-icon>favorite_border</mat-icon></a>
+                        <a><mat-icon>remove_red_eye</mat-icon></a>
+                        <a><mat-icon>cached</mat-icon></a>
+                    </div>
+                    </div>
+                <div class="product-info-wrapper-prueba">
+                    <span class="category-prueba">Headphones</span>
+                    <div class="title-wrap-prueba"><h4>ONTEC E Headset</h4></div>
+                    <div class="stars-prueba">
+                        <mat-icon>star_rate</mat-icon>
+                        <mat-icon>star_rate</mat-icon>
+                        <mat-icon>star_rate</mat-icon>
+                        <mat-icon>star_rate</mat-icon>
+                        <mat-icon>star_rate</mat-icon>
+                    </div>
+                    <div class="price-wrap-prueba">
+                        <p>$175.00</p>
+                        <a><mat-icon>shopping_cart</mat-icon></a>
+                    </div>
+                </div>
+            </mat-card>
+        </div>
+    </div>
+    <div class="product-box-prueba">
+        <div class="product-item-prueba">
+            <mat-card class="card-prueba">
+                <div class="product-img-prueba">
+                    <a class="product-link-prueba">
+                        <img src="https://lazeapostolski.com/sophia-ecommerce/assets/images/product/small/headphone1/headphone1.png" alt="">
+                    </a>
+                    <div class="icons">
+                        <a><mat-icon>favorite_border</mat-icon></a>
+                        <a><mat-icon>remove_red_eye</mat-icon></a>
+                        <a><mat-icon>cached</mat-icon></a>
+                    </div>
+                    </div>
+                <div class="product-info-wrapper-prueba">
+                    <span class="category-prueba">Headphones</span>
+                    <div class="title-wrap-prueba"><h4>ONTEC E Headset</h4></div>
+                    <div class="stars-prueba">
+                        <mat-icon>star_rate</mat-icon>
+                        <mat-icon>star_rate</mat-icon>
+                        <mat-icon>star_rate</mat-icon>
+                        <mat-icon>star_rate</mat-icon>
+                        <mat-icon>star_rate</mat-icon>
+                    </div>
+                    <div class="price-wrap-prueba">
+                        <p>$175.00</p>
+                        <a><mat-icon>shopping_cart</mat-icon></a>
+                    </div>
+                </div>
+            </mat-card>
+        </div>
+    </div>
+</div> -->
+
+
+
