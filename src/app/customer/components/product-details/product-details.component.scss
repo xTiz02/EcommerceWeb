@@ -3,7 +3,7 @@
     box-sizing: border-box;
     padding: 0;
     margin: 0;
-    // font-family: 'Open Sans', sans-serif;
+   
 }
 body{
     line-height: 1.5;
@@ -64,15 +64,7 @@ img{
     letter-spacing: .02em;
     margin-bottom: 10px;
 }
-// .product-title::after{
-//     content: "";
-//     position: absolute;
-//     left: 0;
-//     bottom: 0;
-//     height: 4px;
-//     width: 80px;
-//     background: #12263a;
-// }
+
 .product-link{
     text-decoration: none;
     text-transform: uppercase;
@@ -88,18 +80,6 @@ img{
 .product-link:hover{
     opacity: 0.9;
 }
-// .product-rating{
-    
-//     font-size: 1.2rem;
-//     transition: all 0.5s ease;
-//     mat-icon{
-//         color: #dfac16;
-        
-//         cursor: pointer;
-//         transition: .5s ease;
-       
-//     }
-// }
 
 .product-content{
     .product-price{
@@ -214,29 +194,7 @@ img{
     font-weight: 400;
 }
 
-// .social-links{
-//     display: flex;
-//     align-items: center;
-// }
-// .social-links a{
-//     display: flex;
-//     align-items: center;
-//     justify-content: center;
-//     width: 32px;
-//     height: 32px;
-//     color: #000;
-//     border: 1px solid #000;
-//     margin: 0 0.2rem;
-//     border-radius: 50%;
-//     text-decoration: none;
-//     font-size: 0.8rem;
-//     transition: all 0.5s ease;
-// }
-// .social-links a:hover{
-//     background: #000;
-//     border-color: transparent;
-//     color: #fff;
-// }
+
 
 @media screen and (min-width: 992px){
     .card{
