@@ -1,0 +1,22 @@
+.container{
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 20px;
+    h2{
+        text-align: center;
+        margin: 20px 0;
+        color: #141414;
+    }
+    form{
+        display: flex;
+        flex-direction: column;
+        
+        mat-form-field{
+            margin-top: 20px;
+        }
+        button{
+            margin-top: 16px;
+            align-self: center;
+        }
+    }
+}

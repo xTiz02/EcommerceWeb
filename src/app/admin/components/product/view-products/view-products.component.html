@@ -32,7 +32,11 @@
                     </div>
                     <mat-divider></mat-divider>
                     <div class="actions">
-                        <button mat-raised-button color="primary" class="update-button" routerLink="/admin/faq/{{product.id}}">FAQ</button>
+                        <button mat-button [matMenuTriggerFor]="menu">Menu</button>
+                        <mat-menu #menu="matMenu">
+                        <button mat-menu-item>FAQ</button>
+                        <button mat-menu-item (click)="redirectToPromotions(product.id)">Promotion</button>
+                        </mat-menu>
                         <button mat-raised-button color="accent" class="update-button" routerLink="/admin/product/{{product.id}}">Update</button>
                         <button mat-raised-button color="warn" class="delete-button" (click)="deleteProduct(product.id)">Delete</button>
                     </div>

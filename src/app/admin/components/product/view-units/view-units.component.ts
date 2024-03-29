@@ -1,31 +1,25 @@
 import { Component  } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormBuilder,ReactiveFormsModule,FormGroup, Validators, AbstractControl, FormControl } from '@angular/forms';
 //import { Router,ActivatedRoute } from '@angular/router';
 import {MatButtonModule} from '@angular/material/button';
 import {MatCardModule} from '@angular/material/card';
-import {MatFormFieldModule} from '@angular/material/form-field';
-import {MatInputModule} from '@angular/material/input';
-import {MatIconModule} from '@angular/material/icon';
 import {MatSnackBar, MatSnackBarModule} from '@angular/material/snack-bar';
 import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { AdminService } from '../../../service/admin.service';
-import {MatSelectModule} from '@angular/material/select';
 import {MatDividerModule} from '@angular/material/divider';
-import {MatPaginatorModule} from '@angular/material/paginator';
+
 import {MatSlideToggleModule} from '@angular/material/slide-toggle';
 @Component({
   selector: 'app-view-units',
   standalone: true,
-  imports: [ CommonModule,ReactiveFormsModule,MatButtonModule,MatCardModule,MatFormFieldModule,MatInputModule,MatIconModule,MatSnackBarModule,RouterModule,MatSelectModule,MatDividerModule,MatPaginatorModule,MatSlideToggleModule],
+  imports: [ CommonModule,MatButtonModule,MatCardModule,MatSnackBarModule,RouterModule,MatDividerModule,MatSlideToggleModule],
   templateUrl: './view-units.component.html',
   styleUrl: './view-units.component.scss'
 })
 export class ViewUnitsComponent {
-  constructor(private adminService: AdminService, private snackBar: MatSnackBar, private fb: FormBuilder,private activatedRoute: ActivatedRoute ){}
+  constructor(private adminService: AdminService, private snackBar: MatSnackBar,private activatedRoute: ActivatedRoute ){}
   //listAllProducts: any = [];
   
-  searchForm!: FormGroup;
   productId:number = this.activatedRoute.snapshot.params['productId'];
   pageListProductsUnits: any = [];//content
   

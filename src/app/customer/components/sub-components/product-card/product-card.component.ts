@@ -8,6 +8,8 @@ import {MatCardModule} from '@angular/material/card';
 import { ProductView } from '../../../service/interfaces/productView';
 import {MatDialog, MatDialogModule,MatDialogConfig} from '@angular/material/dialog';
 import { DialogContentComponent } from '../dialog-content/dialog-content.component';
+import { CartStorageService } from '../../../service/cart/cart-storage-service.service';
+import { CartItem } from '../../../service/interfaces/cartItem';
 @Component({
   selector: 'app-product-card',
   standalone: true,
@@ -22,9 +24,12 @@ export class ProductCardComponent {
     name: '',
     price: 0,
     imgUrl: '',
-    categoryName: ''
+    categoryName: '',
+    units: []
   };
-  constructor(private dialog:MatDialog){}
+  cartItem?: CartItem;
+
+  constructor(private dialog:MatDialog ,private cartStorage: CartStorageService){}
 
   openDialog(enterAnimationDuration: string, exitAnimationDuration: string,id:number) {
     //enviar id para cargar el producto
@@ -38,4 +43,27 @@ export class ProductCardComponent {
     } );
     console.log(id);
   }
+
+
+  addToCart(unit: number) {
+    this.cartItem = {
+      image: this.product.imgUrl!,
+      productUnitId: unit,
+      name: this.product?.name!,
+      quantity: 1,
+      productId: this.product?.id!,
+      stock: this.product?.units?.find(u => u.id === unit)?.stock!,
+      price: this.product?.price!
+    }
+
+    if(this.product?.promotion){
+      this.cartItem.discount = this.product?.promotion.discount;
+      this.cartItem.discountPrice = Number((this.product?.price! - (this.product?.price! * this.cartItem.discount / 100)).toFixed(2));
+    }
+   this.cartStorage.addCartItem(this.cartItem);
+    
+  }
 }
+
+// active = routerLinkActive  = "active"
+//inactive = routerLinkActive = "inactive"

@@ -1,0 +1,28 @@
+<div class="products-wrapper">
+    <h2>Promotion list</h2>
+    <button mat-raised-button color="primary" class="add-button" routerLink="/admin/product/{{productId}}/promotion">Add Promotion</button>
+    @for (promotion of pageListProductsPromotions; track $index) {
+    <div class="product-box" >
+        <div class="product-item">
+            <mat-card class="card" >
+                <div class="product-info-wrapper">
+                    <span class="category">Discount: {{promotion.discount}}%</span>
+                    <mat-divider></mat-divider>
+                    <div class="title-wrap" style="margin-top: 12px;"><h4 style="text-align: center;">Start: {{promotion.startDate}}</h4></div>
+                    <div class="price-wrap">
+                        <span style="text-align: center;">End: {{promotion.endDate}}</span>
+                        <!-- <mat-slide-toggle class="category" [checked]="promotion.enabled" >Enabled</mat-slide-toggle> -->
+                    </div>
+                    <mat-divider></mat-divider>
+                    <div class="actions">
+                        <button mat-raised-button color="primary" class="update-button" >FAQ</button>
+                        <button mat-raised-button color="accent" class="update-button" routerLink="/admin/product/{{productId}}/promotion/{{promotion.id}}">Update</button>
+                        <button mat-raised-button color="warn" class="delete-button" (click)="deletePromotion(promotion.id)">Delete</button>
+                    </div>
+                </div>
+                
+            </mat-card>
+        </div>
+    </div>
+    }
+</div>

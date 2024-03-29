@@ -151,5 +151,36 @@ export class AdminService {
   changeStatusProductUnit(productId:number,unitId:number,enabled:boolean){
     return this.http.put(API_URL + 'api/admin/product/'+productId+'/unit/'+unitId+'/status?enabled='+enabled.toString(),null, { headers: this.createAuthorizationHeader() });
   }
+
+
+  //promotion
+  postPromotion(productId:number,promotion: any) {
+    promotion.productId = productId;
+    return this.http.post(API_URL + 'api/admin/promotion', promotion, { headers: this.createAuthorizationHeader() });
+  }
+  countPromotionsByProductId(productId: number): any{
+    return this.http.get(API_URL + 'api/admin/promotions/product/'+productId+'/count', { headers: this.createAuthorizationHeader() }).pipe(map((res: any) => {
+      return res.corps.data;
+    }));
+  }
+
+  getPromotionsByProductId(productId:number){
+    return this.http.get(API_URL + 'api/admin/promotions/product/'+productId, { headers: this.createAuthorizationHeader() }).pipe(map((res: any) => {
+      return res.corps.data;
+    }));
+  }
+
+  deletePromotion(id: number) {
+    return this.http.delete(API_URL + 'api/admin/promotion/' + id, { headers: this.createAuthorizationHeader() });
+  }
+
+  getPromotionById(promotionId:number){
+    return this.http.get(API_URL + 'api/admin/promotion/'+promotionId,{ headers: this.createAuthorizationHeader() });
+  }
+
+  updatePromotion(promotion: any) {
+    return this.http.put(API_URL + 'api/admin/promotion/'+promotion.id, promotion, { headers: this.createAuthorizationHeader() });
+  }
+
 }
 

@@ -1,0 +1,34 @@
+<div class="container">
+    <h2>Post Promotion Form</h2>
+        <form [formGroup]="validateForm">
+          <mat-form-field appearance="outline" class="form-field">
+              <mat-label>Discount</mat-label>
+              <input matInput type="number" placeholder="discount" formControlName="discount" >
+              @if (discount.invalid && discount.touched) {
+                  <mat-error>{{checkForErrorsIn(discount,"discount")}}</mat-error>
+              }
+          </mat-form-field>
+
+          <mat-form-field>
+            <mat-label>Enter a date range</mat-label>
+            <mat-date-range-input [rangePicker]="picker">
+              <input matStartDate formControlName="startDate" placeholder="Start date">
+              <input matEndDate formControlName="endDate" placeholder="End date">
+            </mat-date-range-input>
+            <mat-hint>MM/DD/YYYY – MM/DD/YYYY</mat-hint>
+            <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-date-range-picker #picker></mat-date-range-picker>
+          
+            <!-- @if (range.controls.start.hasError('matStartDateInvalid')) {
+              <mat-error>Invalid start date</mat-error>
+            }
+            @if (range.controls.end.hasError('matEndDateInvalid')) {
+              <mat-error>Invalid end date</mat-error>
+            } -->
+          </mat-form-field>
+            
+          <p>Selected range: {{validateForm.value | json}}</p>
+        <button  mat-raised-button color="primary" type="submit" [disabled]="validateForm.invalid"  (click)="updatePromotion()">Submit</button>
+    </form>
+</div>
+

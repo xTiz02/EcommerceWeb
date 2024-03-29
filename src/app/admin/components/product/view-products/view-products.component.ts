@@ -14,7 +14,8 @@ import {MatSelectModule} from '@angular/material/select';
 import {MatDividerModule} from '@angular/material/divider';
 import {MatPaginatorModule, PageEvent} from '@angular/material/paginator';
 import {MatSlideToggleModule} from '@angular/material/slide-toggle';
-import {MatDialog, MatDialogActions, MatDialogClose, MatDialogContent, MatDialogModule, MatDialogRef, MatDialogTitle} from '@angular/material/dialog';
+import {MatDialogModule} from '@angular/material/dialog';
+import {MatMenuModule} from '@angular/material/menu';
 
 
 
@@ -22,7 +23,7 @@ import {MatDialog, MatDialogActions, MatDialogClose, MatDialogContent, MatDialog
 @Component({
   selector: 'app-view-products',
   standalone: true,
-  imports: [ CommonModule,ReactiveFormsModule,MatButtonModule,MatCardModule,MatFormFieldModule,MatInputModule,MatIconModule,MatSnackBarModule,RouterModule,MatSelectModule,MatDividerModule,MatPaginatorModule,FormsModule,MatSlideToggleModule,MatDialogModule],
+  imports: [ CommonModule,ReactiveFormsModule,MatButtonModule,MatCardModule,MatFormFieldModule,MatInputModule,MatIconModule,MatSnackBarModule,RouterModule,MatSelectModule,MatDividerModule,MatPaginatorModule,FormsModule,MatSlideToggleModule,MatDialogModule,MatMenuModule],
   templateUrl: './view-products.component.html',
   styleUrl: './view-products.component.scss'
 })
@@ -206,6 +207,21 @@ export class ViewProductsComponent {
           this.router.navigateByUrl('/admin/product/'+ productId+ '/units');
         }else{
           this.router.navigateByUrl('/admin/product/'+ productId+ '/unit');
+        }
+      },
+      (err: any) => {
+        console.log(err);
+      }
+    );
+  }
+  redirectToPromotions(productId:number): void {
+    this.adminService.countPromotionsByProductId(productId).subscribe(
+      (res: any) => {
+        console.log(res);
+        if(res>0){
+          this.router.navigateByUrl('/admin/product/'+ productId+ '/promotions');
+        }else{
+          this.router.navigateByUrl('/admin/product/'+ productId+ '/promotion');
         }
       },
       (err: any) => {

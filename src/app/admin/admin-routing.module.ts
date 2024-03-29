@@ -11,6 +11,9 @@ import { PostProductUnitComponent } from './components/product/post-product-unit
 import { ViewUnitsComponent } from './components/product/view-units/view-units.component';
 import { UpdateProductComponent } from './components/product/update-product/update-product.component';
 import { UpdateUnitComponent } from './components/product/update-unit/update-unit.component';
+import { PostPromotionComponent } from './components/promotion/post-promotion/post-promotion.component';
+import { ViewPromotionsComponent } from './components/promotion/view-promotions/view-promotions.component';
+import { UpdatePromotionComponent } from './components/promotion/update-promotion/update-promotion.component';
 
 const routes: Routes = [
   { path: '', component: AdminComponent,
@@ -25,6 +28,9 @@ const routes: Routes = [
       {path:'product/:productId/units',component:ViewUnitsComponent},
       {path:'product/:productId',component:UpdateProductComponent},
       {path:'product/:productId/unit/:unitId',component:UpdateUnitComponent},
+      {path:'product/:productId/promotion',component:PostPromotionComponent},
+      {path:'product/:productId/promotions',component:ViewPromotionsComponent},
+      {path:'product/:productId/promotion/:promotionId',component:UpdatePromotionComponent}
     ]
   }
 ];

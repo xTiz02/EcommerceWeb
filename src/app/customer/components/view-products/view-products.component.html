@@ -56,6 +56,7 @@
                                 </div>
                                 <div class="btn-filter">
                                     <button mat-button (click)="submitFilter()">Filter</button>
+                                    <button mat-button (click)="cleanFilter()">Clean</button>
                                 </div>
                                 
                             </div>
@@ -70,9 +71,12 @@
                                         </mat-panel-title>
                                     </mat-expansion-panel-header>
                                     <mat-list role="list">
-                                        <mat-list-item role="listitem"><a routerLink="/customer/home">Show All</a></mat-list-item>
-                                        <mat-list-item role="listitem"><a routerLink="/customer/home">Show All</a></mat-list-item>
-                                        <mat-list-item role="listitem"><a routerLink="/customer/home">Show All</a></mat-list-item>
+                                        <mat-list-item role="listitem"><a [routerLink]="['/customer/view-products']"
+                                            [queryParams]="{ order: 'all'}">Show All</a></mat-list-item>
+                                        <mat-list-item role="listitem"><a [routerLink]="['/customer/view-products']"
+                                            [queryParams]="{ order: 'asc'}">Ascending</a></mat-list-item>
+                                        <mat-list-item role="listitem"><a [routerLink]="['/customer/view-products']"
+                                            [queryParams]="{ order: 'dsc'}">Descending</a></mat-list-item>
                                     </mat-list>
                                     </mat-expansion-panel>
                                 </mat-accordion>
@@ -80,33 +84,7 @@
                         </form>
                         
                     </div>
-                    <div class="section">
-                        <div class="filter-row">
-                            <mat-form-field>
-                                <input matInput>
-                                <mat-label>Search product</mat-label>
-                                <mat-icon matSuffix>mode_edit</mat-icon>
-                            </mat-form-field>
-                        </div>
-                        <div class="products-wrapper-prueba">
-                            @for (product of productListView; track $index) {
-                                <app-product-card [product]="product" class="product-box-prueba"></app-product-card>
-                            }
-                          
-                        </div>
-                        <mat-paginator #paginator
-               class="demo-paginator"
-               (page)="handlePageEvent($event)"
-               [length]="length"
-               [pageSize]="pageSize"
-               [disabled]="disabled"
-               [showFirstLastButtons]="false"
-               [pageSizeOptions]="showPageSizeOptions ? pageSizeOptions : []"
-               [hidePageSize]="true"
-               [pageIndex]="pageIndex"
-               aria-label="Select page">
-</mat-paginator>
-                    </div>
+                    <app-product-page class="section" [pageIndex]="pageIndex!" [productPageView]="productListView" [length] = "lengthProducts" (filterData)="handleFilterPageData($event)" ></app-product-page>
                 </div>
             </div>
         </div>

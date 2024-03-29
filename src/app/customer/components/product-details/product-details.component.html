@@ -7,41 +7,22 @@
       <div class = "product-imgs">
         <div class = "img-display">
           <div class = "img-showcase">
-            <img src = "https://lazeapostolski.com/sophia-ecommerce/assets/images/product/small/headphone1/headphone1.png" alt = "shoe image">
+            <img src = "{{principalImage}}" alt = "shoe image">
           </div>
         </div>
         <div class = "img-select">
-          <div class = "img-item">
-            <a href = "#" data-id = "1">
-              <img src = "https://lazeapostolski.com/sophia-ecommerce/assets/images/product/small/headphone1/headphone1.png" alt = "shoe image">
-            </a>
-          </div>
-          <div class = "img-item">
-            <a href = "#" data-id = "2">
-              <img src = "https://lazeapostolski.com/sophia-ecommerce/assets/images/product/small/headphone1/headphone3.png" alt = "shoe image">
-            </a>
-          </div>
-          <div class = "img-item">
-            <a href = "#" data-id = "3">
-              <img src = "https://lazeapostolski.com/sophia-ecommerce/assets/images/product/small/headphone1/headphone4.png" alt = "shoe image">
-            </a>
-          </div>
-          <div class = "img-item">
-            <a href = "#" data-id = "4">
-              <img src = "https://lazeapostolski.com/sophia-ecommerce/assets/images/product/small/headphone1/iTECH_1.png" alt = "shoe image">
-            </a>
-          </div>
-          <div class = "img-item">
-            <a href = "#" data-id = "4">
-              <img src = "https://lazeapostolski.com/sophia-ecommerce/assets/images/product/small/headphone1/iTECH_1.png" alt = "shoe image">
-            </a>
-          </div>
-          
+          @for (img of principalUnit!.images!; track $index) {
+            <div class = "img-item">
+              <a href = "#" data-id = "1">
+                <img src = "{{img}}" alt = "shoe image">
+              </a>
+            </div>
+          }
         </div>
       </div>
       <!-- card right -->
       <div class = "product-content">
-        <div class = "product-title"><h2>Dono Purple Wireless</h2> </div>
+        <div class = "product-title"><h2>{{product?.name}}</h2> </div>
         <!-- <a href = "#" class = "product-link">visit nike store</a> -->
         <!-- <div class = "product-rating">
           <mat-icon>star_rate</mat-icon>
@@ -53,22 +34,36 @@
         </div> -->
 
         <div class = "product-price">
-          <h4>
-            <del>$200</del>
-            <span>50% off</span>
-          </h4>
-          <h3>$100</h3>
+          @if (product?.promotion) {
+            <h4>
+              <del>${{product?.price}}</del>
+              <span> {{product?.promotion?.discount}}% off</span>
+            </h4>
+            <h3>${{product?.price!-product?.price!*product?.promotion?.discount!/100}}</h3>
+          }@else {
+            <h3>${{product?.price}}</h3>
+          }
         </div>
 
         <div class = "product-detail">
           <h2>Principal information: </h2>
           <ul>
-            <li>Color: <span>Black</span></li>
-            <li>Available: <span>in stock</span></li>
-            <li>Category: <span>Shoes</span></li>
-            <li>Shipping Area: <span>All over the world</span></li>
-            <li>Shipping Fee: <span>Free</span></li>
+            @for (cha of characteristics; track $index) {
+              <li>{{cha[0]}}: <span>{{cha[1]}}</span></li>
+            }
           </ul>
+          
+          <!-- cilrcle color to product -->
+          <span style="font-size: 16px;
+          font-weight: 500;
+          margin-right: 10px;">Color: </span>
+          <div class = "color-choose">
+            @for (unit of product?.units; track $index) {
+              
+              <div class = "color-circle" [ngStyle]="{ 'background': unit.color }" (click)="changeUnitPrincipal(unit.id)"><span style="line-height: 26px; padding-left: 7px; font-weight: 900;">{{unit.stock}}</span></div>
+            }
+          </div>
+          
         </div>
 
         <div class="available">
@@ -76,7 +71,12 @@
             <span style="color: #777;
             font-size: 14px;">Avalibility: </span>
             <span style="font-size: 14px;">
-              <span style="font-size: 14px;">In Stock</span>
+              @if (principalUnit.stock==0) {
+                <span style="font-size: 14px;color: red;">Out of Stock</span>
+              }@else if (principalUnit.stock>0){
+             
+                <span style="font-size: 14px;">In Stock </span> 
+              }
             </span>
           </p>
         </div>
@@ -84,15 +84,15 @@
           <span>Quantity</span>
           <div class="btn-text-muted">
             <div class="container">
-              <button mat-icon-button><mat-icon>remove</mat-icon></button>
+              <button mat-icon-button [disabled]="principalUnit.stock==0"><mat-icon>remove</mat-icon></button>
               <input type="text" class="count">
-              <button mat-icon-button><mat-icon>add</mat-icon></button>
+              <button mat-icon-button [disabled]="principalUnit.stock==0"><mat-icon>add</mat-icon></button>
             </div>
           </div>
         </div>
         <div class="buttons">
-          <button mat-button color="primary">ADD TO CARD</button>
-          <button mat-button color="primary">BUY NOW</button>
+          <button mat-button color="primary" (click)="addToCart(principalUnit.id)" [disabled]="principalUnit.stock==0">ADD TO CARD</button>
+          <button mat-button color="primary" [disabled]="principalUnit.stock==0">BUY NOW</button>
         </div>
 
         <!-- <div class = "social-links">
@@ -129,42 +129,12 @@
             <div class="body">
               <table>
                 <tbody>
+                  @for (s of specifications; track $index) {
                   <tr>
-                    <td class="name">Tamaño de la pantalla</td>
-                    <td class="value">6.4 pulgadas</td>
+                    <td class="name">{{s[0]}}</td>
+                    <td class="value">{{s[1]}}</td>
                   </tr>
-                  <tr>
-                    <td class="name">Tamaño de la pantalla</td>
-                    <td class="value">6.4 pulgadas</td>
-                  </tr>
-                  <tr>
-                    <td class="name">Tamaño de la pantalla</td>
-                    <td class="value">6.4 pulgadas</td>
-                  </tr>
-                  <tr>
-                    <td class="name">Tamaño de la pantalla</td>
-                    <td class="value">6.4 pulgadas</td>
-                  </tr>
-                  <tr>
-                    <td class="name">Tamaño de la pantalla</td>
-                    <td class="value">6.4 pulgadas</td>
-                  </tr>
-                  <tr>
-                    <td class="name">Tamaño de la pantalla</td>
-                    <td class="value">6.4 pulgadas</td>
-                  </tr>
-                  <tr>
-                    <td class="name">Tamaño de la pantalla</td>
-                    <td class="value">6.4 pulgadas</td>
-                  </tr>
-                  <tr>
-                    <td class="name">Tamaño de la pantalla</td>
-                    <td class="value">6.4 pulgadas</td>
-                  </tr>
-                  <tr>
-                    <td class="name">Tamaño de la pantalla</td>
-                    <td class="value">6.4 pulgadas</td>
-                  </tr>
+                  }
                 </tbody>
               </table>
             </div>
@@ -180,18 +150,9 @@
                 <div class="information">
                   <h4><b>Ficha del producto:</b></h4>
                   <ul>
-                    <li>Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatem suscipit sit deleniti ea accusantium hic in alias asperiores labore sed delectus, omnis quidem ratione ad, beatae debitis possimus voluptas fugit!</li>
-                    <li>Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatem suscipit sit deleniti ea accusantium hic in alias asperiores labore sed delectus, omnis quidem ratione ad, beatae debitis possimus voluptas fugit!</li>
-                    <li>Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatem suscipit sit deleniti ea accusantium hic in alias asperiores labore sed delectus, omnis quidem ratione ad, beatae debitis possimus voluptas fugit!</li>
-                    <li>Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatem suscipit sit deleniti ea accusantium hic in alias asperiores labore sed delectus, omnis quidem ratione ad, beatae debitis possimus voluptas fugit!</li>
-                    <li>Profundidad: 0.82</li>
-                    <li>Profundidad: 0.82</li>
-                    <li>Profundidad: 0.82</li>
-                    <li>Profundidad: 0.82</li>
-                    <li>Profundidad: 0.82</li>
-                    <li>Profundidad: 0.82</li>
-                    <li>Profundidad: 0.82</li>
-                    <li>Profundidad: 0.82</li>
+                    @for (d of description; track $index) {
+                      <li>{{d}}</li>
+                    }
                   </ul>
                 </div>
               </div>

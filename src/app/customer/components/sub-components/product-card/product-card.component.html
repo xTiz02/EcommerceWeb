@@ -7,7 +7,7 @@
                 </a>
                 <div class="icons">
                     <a><mat-icon>favorite_border</mat-icon></a>
-                    <a (click)="openDialog('400ms', '600ms',product.id)"><mat-icon>remove_red_eye</mat-icon></a>
+                    <a (click)="openDialog('300ms', '400ms',product.id)"><mat-icon>remove_red_eye</mat-icon></a>
                     <a><mat-icon>cached</mat-icon></a>
                 </div>
                 </div>
@@ -22,8 +22,22 @@
                     <mat-icon>star_rate</mat-icon>
                 </div>
                 <div class="price-wrap-prueba">
-                    <p>${{product.price}}<del class="old-price-prueba">$100</del></p>
-                    <a><mat-icon>shopping_cart</mat-icon></a>
+                    @if (product.promotion) {
+                        
+                        <p>${{product.price - (product.price*product.promotion.discount/100!)}}<del class="old-price-prueba">${{product.price}}</del></p>
+                    }@else{
+                        <p>${{product.price}}</p>
+                    }
+                   
+                    @if (product.units) {
+                        @if(product.units![0].stock==0) {
+                            <a style="background-color: red;"><mat-icon>shopping_cart</mat-icon></a>
+                        }@else{
+                            <a (click)="addToCart(product.units![0].id)"><mat-icon>shopping_cart</mat-icon></a>
+                        }
+                    }
+                    
+                    
                 </div>
             </div>
         </mat-card>

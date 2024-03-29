@@ -1,5 +1,3 @@
-<!-- <h2 mat-dialog-title>Delete file</h2>
- -->
 
   <div class="product-dialog">
     <div class="close-btn-closer"></div>
@@ -7,21 +5,39 @@
       <div class="container">
         <div class="img-container">
           <div class="container">
-            <img src="https://lazeapostolski.com/sophia-ecommerce/assets/images/product/small/headphone1/headphone1.png" alt="">
+            <img src="{{principalImage}}" alt="">
           </div>
         </div>
         <div class="details-container">
           <div class="product-right">
             <div class="product-details">
-              <h2 class="mb-10">Dono Purple Wireless</h2>
-              <h4 class="mb-10">
-                <del>$200.00</del>
-                <span> 50% off</span>
-              </h4>
-              <h3 class="price mb-10">$100.00</h3>
+              <h2 class="mb-10">{{product?.name}}</h2>
+              @if (product?.promotion) {
+                <h4 class="mb-10">
+                  <del>${{product?.price}}</del>
+                  <span> {{product?.promotion?.discount}}% off</span>
+                </h4>
+                <h3 class="price mb-10">${{product?.price!-product?.price!*product?.promotion?.discount!/100}}</h3>
+              }@else {
+                <h3 class="price mb-10">${{product?.price}}</h3>
+              }
+              
               <div class="description">
                 <p class="bold">Product details</p>
-                <p class="text-muted productDescription">Lorem ipsum dolor sit amet consectetur adipisicing elit. Officia voluptatem molestias dolor ad in, laudantium blanditiis autem, quis natus modi quia facilis. Ipsum aut consequatur, consectetur excepturi suscipit nemo. Aspernatur.</p>
+                <ul class="text-muted productDescription">
+                  @for (cha of characteristics; track $index) {
+                    <li>{{cha[0]}}: <span>{{cha[1]}}</span></li>
+                  }
+                </ul>
+                <span style="font-size: 16px;
+                font-weight: 500;
+                margin-right: 10px;">Color: </span>
+                <div class = "color-choose">
+                  @for (unit of product?.units; track $index) {
+                  
+                    <div class = "color-circle" [ngStyle]="{ 'background': unit.color }" (click)="changeUnitPrincipal(unit.id)"></div>
+                  }
+                </div>
               </div>
             </div>
             <div class="stock">
@@ -44,8 +60,8 @@
                 </div>
               </div>
               <div class="buttons">
-                <mat-icon>shopping_cart</mat-icon>
-                <mat-icon>remove_red_eye</mat-icon>
+                <button mat-icon-button (click)="addToCart(principalUnit.id)" [disabled]="principalUnit.stock==0"><mat-icon>shopping_cart</mat-icon></button>
+                <button mat-icon-button routerLink="/customer/product/{{product?.id}}/{{product?.name}}" routerLinkActive="router-link-active"  (click)=" closeDialog()"><mat-icon>remove_red_eye</mat-icon></button>
               </div>
             </div>
           </div>

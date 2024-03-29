@@ -63,7 +63,7 @@ export class LoginComponent {
             this.router.navigateByUrl('/admin/dashboard');
           }
           if(StorageService.isCustomerLoggedIn()){
-            this.router.navigateByUrl('/customer/dashboard');
+            this.router.navigateByUrl('/customer/home');
           }
         }else{
           this.snackBar.open('Something went wrong, please try again later', 'Close', {

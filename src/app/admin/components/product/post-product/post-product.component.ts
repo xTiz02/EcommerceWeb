@@ -41,8 +41,8 @@ export class PostProductComponent {
   ngOnInit(): void {
     this.getAllCategories();
     this.validateForm = this.fb.group({
-      name: [null, [Validators.required,Validators.minLength(4),Validators.maxLength(15)]],
-      description: [null, [Validators.required,Validators.maxLength(70)]],
+      name: [null, [Validators.required,Validators.minLength(4),Validators.maxLength(40)]],
+      description: [null, [Validators.required]],
       price: [null, [Validators.required,Validators.min(1)]],
       characteristics: [null, [Validators.required]],
       specifications: [null, [Validators.required]],

@@ -5,8 +5,26 @@ export interface ProductView{
     imgUrl:string;
     categoryName:string;
     description?:string;
-    stock?:number;
     discount?:number;
+    stardDate?:Date;
+    endDate?:Date;
     specifications?:string;
     characteristics?:string;
+    promotion?:{
+        id:number;
+        discount:number;
+        startDate:Date;
+        endDate:Date;
+        
+    }
+    //lista de unidades
+    units:{
+        id:number;
+        color:string;
+        priceModifier:number;
+        stock:number;
+        images:String[];
+    }[]
+
+    //definir metodo para obtener el precio con descuento
 }

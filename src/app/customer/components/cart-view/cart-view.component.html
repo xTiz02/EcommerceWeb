@@ -1,0 +1,245 @@
+<div *ngIf="cartItemsCount === '0'" class="cart-empty">
+    <div class="cart-empty-title">Cart is empty!</div>
+  </div>
+  
+  <div *ngIf="+cartItemsCount > 0 " class="container-lg">
+  
+    <div class="cart-title-lg">
+      Your cart: {{ cartItemsCount }} {{ cartItemsCount === '1' ? ' item' : ' items' }}
+    </div>
+  
+    <div class="items-section-lg">
+  
+      <div *ngFor='let item of cartItems' class="item-lg">
+        
+        <div class="container-delete" >
+          <button mat-icon-button class="item-delete-lg" (click)='removeToCart(item.productUnitId)'>
+            <!-- (click)='onDelete(item.productId)' -->
+            <mat-icon class="item-delete-icon">close</mat-icon>
+          </button>
+        </div>
+  
+        <div class="image-lg">
+          
+          <img [src]='item.image' [alt]='item.name' (click)="redirectToProduct(item.productId,item.name)">
+            <!-- [routerLink]="'/product/' + getFriendlyName(item.productName)" [queryParams]="{ id: item.productId }" -->
+        </div>
+  
+        <div class="name-lg" >
+          
+          <!-- [routerLink]="'/product/' + getFriendlyName(item.productName)"
+          [queryParams]="{ id: item.productId }" -->
+          {{ item.name.substring(0, 30) + '...' }}
+          @if (item.discount) {
+            <div style="margin-top: 10px;"><span> {{item.discount}}% off</span></div>
+          }
+          
+        </div>
+        <div class="item-price-container">
+        @if (item.discount) {
+           <div class="item-unit-price-lg">
+            T:{{ '  $' + item.total }}
+          </div>
+        }@else{
+          <div class="item-unit-price-lg">
+            T:{{ '  $' + item.total }}
+          </div>
+        }
+       
+  
+        <div class="controls-lg">
+  
+          <div>
+            <button mat-icon-button (click)='reduceToCart(item.productUnitId)'>
+              <!-- (click)='onRemove(item.productId)' color='primary' -->
+              <mat-icon class="control-icon" >remove</mat-icon>
+            </button>
+          </div>
+  
+          <div>
+            
+              <input [value]='item.quantity' min='1' class="count">
+            <!-- (input)='onChange(item.productId, $event)' -->
+          
+          </div>
+  
+          <div>
+            <button mat-icon-button  color='primary' (click)="addToCart(item)">
+              <!-- (click)="onAdd(item.productId, '1')" -->
+              <mat-icon class="control-icon" >add</mat-icon>
+            </button>
+          </div>
+  
+        </div>
+        <div class="price-item-details">
+          
+          @if (item.discount) {
+            <div class="item-total-price-lg">
+              Original:
+              <del>{{ '  $' + (+item.price!).toString()}}</del>
+            </div>
+            <div class="item-delivery-lg">
+            Discount:{{ '  $'+(item.price-item.discountPrice!).toFixed(2)}}
+            </div>
+          }@else{
+            <div class="item-total-price-lg">
+              Original:{{ '  $' + (+item.price!).toString()}}
+            </div>
+          }
+          
+        </div><mat-divider style="width: 65%;"></mat-divider>
+      </div>
+        
+      
+      </div>
+    </div>
+  
+    <mat-divider></mat-divider>
+  
+    <div class="summary-section">
+      <div></div>
+      <div class="text">Subtotal ({{ cartItemsCount }} {{ cartItemsCount === '1' ? ' item' : ' items' }})</div>
+      <div></div>
+      <div class="value">{{ '$' + subTotal }}</div>
+      <div></div>
+  
+      <div></div>
+      <div class="text">IGV</div>
+      <div></div>
+      <div class="value">$0.0</div>
+      <div></div>
+  
+      <div></div>
+      <div class="text">
+        <div>Coupon</div>
+      </div>
+      <div></div>
+      <div class="value">$0.0</div>
+  
+    </div>
+  
+    <mat-divider></mat-divider>
+  
+    <div class="total-section">
+      <div></div>
+      <div class="total-text">Total</div>
+      <div></div>
+      <div class="total-value">{{ '$' + total }}</div>
+      <div></div>
+    </div>
+  
+    <div class="action-section">
+      <button type="button" class="button-lg" mat-raised-button (click)="saveItems()">
+        <mat-icon class="icon">checkout</mat-icon>Checkout
+      </button>
+    </div>
+  </div>
+  
+  
+  
+  <!-- <div *ngIf="+cartItemsCount > 0 " class="container">
+  
+    <div class="cart-title">
+      Your cart: {{ cartItemsCount }} {{ cartItemsCount === '1' ? ' item' : ' items' }}
+    </div>
+  
+    <div class="items">
+      <div *ngFor='let item of cart.items' class="item">
+  
+        <div class="first-line">
+          <div class="image">
+            <img [src]='item.productImageUrl' [alt]='item.productName'
+              [routerLink]="'/product/' + getFriendlyName(item.productName)" [queryParams]="{ id: item.productId }">
+          </div>
+  
+          <div>
+            <div class="name" [routerLink]="'/product/' + getFriendlyName(item.productName)"
+              [queryParams]="{ id: item.productId }">
+              {{ item.productName | limit }}
+            </div>
+          </div>
+  
+          <div class="price">
+            {{ '$' + item.productPriceAfterDiscount }}
+          </div>
+        </div>
+  
+  
+        <div class="second-line">
+  
+          <div class="controls">
+  
+            <div>
+              <button type="button" mat-icon-button (click)='onRemove(item.productId)' color='primary'>
+                <mat-icon class="control-icon">remove</mat-icon>
+              </button>
+            </div>
+  
+            <div>
+              <mat-form-field>
+                <input matInput (input)='onChange(item.productId, $event)' [value]='item.quantity' min='1'>
+              </mat-form-field>
+            </div>
+  
+            <div>
+              <button type="button" mat-icon-button (click)="onAdd(item.productId, '1')" color='primary'>
+                <mat-icon class="control-icon">add</mat-icon>
+              </button>
+            </div>
+  
+          </div>
+  
+          <div class="delete">
+            <div>
+              <button mat-button (click)='onDelete(item.productId)'>
+                <mat-icon class="item-delete-icon">delete</mat-icon>
+              </button>
+            </div>
+          </div>
+  
+        </div>
+  
+      </div>
+    </div>
+  
+    <mat-divider></mat-divider>
+  
+  
+    <div class="cart-total">
+  
+      <div class="subtotal">
+        <div class="text">Subtotal ({{ cartItemsCount }} {{ cartItemsCount === '1' ? ' item' : ' items' }})</div>
+        <div class="value">{{ '$' + cart.subtotal }}</div>
+      </div>
+  
+      <div class="delivery">
+        <div class="text">Delivery</div>
+        <div class="value">{{ +cart.deliveryTotal > 0 ? '$' + cart.deliveryTotal : 'Free' }}</div>
+      </div>
+  
+      <div class="tax">
+        <div class="text">
+          <div>Taxes & Fees</div>
+          <div class="tax-note">(Calculated in checkout)</div>
+        </div>
+        <div class="tax-value">--</div>
+      </div>
+  
+      <mat-divider></mat-divider>
+  
+      <div class="total">
+        <div class="text">Total ({{ cartItemsCount }} {{ cartItemsCount === '1' ? ' item' : ' items' }})</div>
+        <div class="total-value">{{ '$' + cart.total }}</div>
+      </div>
+  
+      <div class="checkout">
+        <button type="button" class="button" mat-raised-button color='primary' routerLink='/checkout'>
+          <mat-icon class="icon">checkout</mat-icon>Checkout
+        </button>
+      </div>
+  
+    </div>
+  
+  
+  
+  </div> -->

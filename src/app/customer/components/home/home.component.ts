@@ -69,14 +69,15 @@ export class HomeComponent {
     this.tabTypes.push({id:2,title:'Popular Products',data:this.service.productsMemory,icon:'trending_up'});
   }
   loadPromotionsProducts(){
-    // this.service.loadPromotionsProductsStandardMethod(8).subscribe((res:any)=>{
-    //   this.promotionsProductsView = res;
-    //   this.tabTypes?.push({id:3,title:'Promotions',data:this.promotionsProductsView,icon:'local_offer'});
-    // },(err:any)=>{
-    //   this.promotionsProductsView = this.service.productsMemory;
-    // }
-    // );
-    this.tabTypes.push({id:3,title:'Promotions',data:this.service.productsMemory,icon:'local_offer'});
+    this.service.loadPromotionsProductsStandardMethod(8).subscribe((res:any)=>{
+      console.log(res);
+      this.promotionsProductsView = res;
+      this.tabTypes?.push({id:3,title:'Promotions',data:this.promotionsProductsView,icon:'local_offer'});
+    },(err:any)=>{
+      this.tabTypes?.push({id:3,title:'Promotions',data:this.service.productsMemory,icon:'local_offer'});
+      this.promotionsProductsView = this.service.productsMemory;
+    }
+    );
   }
 
 

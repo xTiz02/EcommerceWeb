@@ -1,15 +1,18 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { BehaviorSubject, Observable, catchError, map, throwError } from 'rxjs';
 import { Category } from './interfaces/category';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ProductView } from './interfaces/productView';
+import { Filter } from '../components/sub-components/product-page/product-page.component';
+import { CartItem } from './interfaces/cartItem';
 
 const URL = 'http://localhost:8085/';
 @Injectable({
   providedIn: 'root'
 })
 export class CustomerServiceService {
+  CartStorageService: any;
 
   constructor(private http: HttpClient,private snackBar: MatSnackBar) { 
      
@@ -32,6 +35,15 @@ export class CustomerServiceService {
       categoryName:"Headphones",
       name:"ONTEC E Headset",
       price: 200,
+      units:[
+        {
+          id:1,
+          color:"Black",
+          priceModifier:0,
+          stock:10,
+          images:["https://lazeapostolski.com/sophia-ecommerce/assets/images/product/small/headphone1/headphone1.png"]
+        }
+      ]
     },
     {
       id:2,
@@ -39,6 +51,15 @@ export class CustomerServiceService {
       categoryName:"Headphones",
       name:"ONTEC E Headset",
       price: 200,
+      units:[
+        {
+          id:1,
+          color:"Black",
+          priceModifier:0,
+          stock:10,
+          images:["https://lazeapostolski.com/sophia-ecommerce/assets/images/product/small/headphone1/headphone1.png"]
+        }
+      ]
     },
     {
       id:3,
@@ -46,6 +67,15 @@ export class CustomerServiceService {
       categoryName:"Headphones",
       name:"ONTEC E Headset",
       price: 200,
+      units:[
+        {
+          id:1,
+          color:"Black",
+          priceModifier:0,
+          stock:10,
+          images:["https://lazeapostolski.com/sophia-ecommerce/assets/images/product/small/headphone1/headphone1.png"]
+        }
+      ]
     },
     {
       id:4,
@@ -53,6 +83,15 @@ export class CustomerServiceService {
       categoryName:"Headphones",
       name:"ONTEC E Headset",
       price: 200,
+      units:[
+        {
+          id:1,
+          color:"Black",
+          priceModifier:0,
+          stock:10,
+          images:["https://lazeapostolski.com/sophia-ecommerce/assets/images/product/small/headphone1/headphone1.png"]
+        }
+      ]
     },
     {
       id:5,
@@ -60,6 +99,15 @@ export class CustomerServiceService {
       categoryName:"Headphones",
       name:"ONTEC E Headset",
       price: 200,
+      units:[
+        {
+          id:1,
+          color:"Black",
+          priceModifier:0,
+          stock:10,
+          images:["https://lazeapostolski.com/sophia-ecommerce/assets/images/product/small/headphone1/headphone1.png"]
+        }
+      ]
     },
     {
       id:6,
@@ -67,6 +115,15 @@ export class CustomerServiceService {
       categoryName:"Headphones",
       name:"ONTEC E Headset",
       price: 200,
+      units:[
+        {
+          id:1,
+          color:"Black",
+          priceModifier:0,
+          stock:10,
+          images:["https://lazeapostolski.com/sophia-ecommerce/assets/images/product/small/headphone1/headphone1.png"]
+        }
+      ]
     },
     {
       id:7,
@@ -74,6 +131,15 @@ export class CustomerServiceService {
       categoryName:"Headphones",
       name:"ONTEC E Headset",
       price: 200,
+      units:[
+        {
+          id:1,
+          color:"Black",
+          priceModifier:0,
+          stock:10,
+          images:["https://lazeapostolski.com/sophia-ecommerce/assets/images/product/small/headphone1/headphone1.png"]
+        }
+      ]
     },
     {
       id:8,
@@ -81,6 +147,15 @@ export class CustomerServiceService {
       categoryName:"Headphones",
       name:"ONTEC E Headset",
       price: 200,
+      units:[
+        {
+          id:1,
+          color:"Black",
+          priceModifier:0,
+          stock:10,
+          images:["https://lazeapostolski.com/sophia-ecommerce/assets/images/product/small/headphone1/headphone1.png"]
+        }
+      ]
     },
     {
       id:9,
@@ -88,6 +163,15 @@ export class CustomerServiceService {
       categoryName:"Headphones",
       name:"ONTEC E Headset",
       price: 200,
+      units:[
+        {
+          id:1,
+          color:"Black",
+          priceModifier:0,
+          stock:10,
+          images:["https://lazeapostolski.com/sophia-ecommerce/assets/images/product/small/headphone1/headphone1.png"]
+        }
+      ]
     },
     {
       id:10,
@@ -95,6 +179,15 @@ export class CustomerServiceService {
       categoryName:"Headphones",
       name:"ONTEC E Headset",
       price: 200,
+      units:[
+        {
+          id:1,
+          color:"Black",
+          priceModifier:0,
+          stock:10,
+          images:["https://lazeapostolski.com/sophia-ecommerce/assets/images/product/small/headphone1/headphone1.png"]
+        }
+      ]
     },
     {
       id:11,
@@ -102,6 +195,15 @@ export class CustomerServiceService {
       categoryName:"Headphones",
       name:"ONTEC E Headset",
       price: 200,
+      units:[
+        {
+          id:1,
+          color:"Black",
+          priceModifier:0,
+          stock:10,
+          images:["https://lazeapostolski.com/sophia-ecommerce/assets/images/product/small/headphone1/headphone1.png"]
+        }
+      ]
     },
     {
       id:12,
@@ -109,8 +211,43 @@ export class CustomerServiceService {
       categoryName:"Smartphones",
       name:"ONTEC E Headset",
       price: 200,
+      units:[
+        {
+          id:1,
+          color:"Black",
+          priceModifier:0,
+          stock:10,
+          images:["https://lazeapostolski.com/sophia-ecommerce/assets/images/product/small/headphone1/headphone1.png"]
+        }
+      ]
     }
   ];
+
+  productMemory: ProductView = {
+    id:1,
+    imgUrl:"https://lazeapostolski.com/sophia-ecommerce/assets/images/product/small/headphone1/headphone1.png",
+    categoryName:"Headphones",
+    name:"ONTEC E Headset",
+    price: 200,
+    discount: 10,
+    stardDate: new Date(),
+    endDate: new Date(),
+    specifications: "Specifications",
+    characteristics: "Characteristics",
+    promotion:{
+      id:1,
+      discount:10,
+      startDate:new Date(),
+      endDate:new Date()
+    },
+    units:[{
+      id:1,
+      color:"Black",
+      priceModifier:0,
+      stock:10,
+      images:["https://lazeapostolski.com/sophia-ecommerce/assets/images/product/small/headphone1/headphone1.png"]
+    }]
+  };
 
   public getCategoriesList(): Observable<Category[]> {
     return this.http.get<Category[]>(URL + 'api/customer/categories');
@@ -189,6 +326,74 @@ export class CustomerServiceService {
       })
     )
   }
+
+
+  public getProductWithDetails(id:number): Observable<ProductView> {
+    return this.http.get<ProductView>(URL + 'api/customer/product/'+id);
+  }
+
+
+  loadProductWithDetailsStandardMethod(id:number): Observable<ProductView>{
+    return this.getProductWithDetails(id).pipe(
+      map((res:any) => {
+        console.log(res);
+        return res.corps.data as ProductView;
+      }),
+      catchError(err => {
+        console.log(err);
+        if(err.status==0){
+          this.snackBar.open('Server not working...', 'Close', {
+            duration: 7000,
+          });
+        }else{
+          const corps = err.error.corps;
+          this.printErrorToGetAllOrFindResource(corps);
+        }
+        return throwError(err);
+      })
+    )
+  }
+
+  public getPageProductsList(filterPageData:Filter): Observable<any> {
+    if(filterPageData.title){
+      return this.http.get(URL + 'api/customer/products/page', {params:{title:filterPageData.title!.toString(),page:filterPageData.index.toString(),size:filterPageData.size.toString()}} );
+    }else{
+       return this.http.get(URL + 'api/customer/products/page', {params:{page:filterPageData.index.toString(),size:filterPageData.size.toString()}} );
+    }
+   
+  }
+
+  public getPageFilteredProductsList(filterData:any): Observable<any> {
+    return this.http.post(URL + 'api/customer/products/filtered/page',filterData);
+  }
+
+  public getfirtsProductsWithPromotionList(limit:number): Observable<any> {
+    return this.http.get(URL + 'api/customer/products/promotions/first/'+limit);
+  }
+  public loadPromotionsProductsStandardMethod(limit:number): Observable<any>{
+    return this.getfirtsProductsWithPromotionList(limit).pipe(
+      map((res:any) => {
+        console.log(res);
+        return res.corps.data as ProductView[];
+      }),
+      catchError(err => {
+        console.log(err);
+        if(err.status==0){
+          this.snackBar.open('Server not working...', 'Close', {
+            duration: 7000,
+          });
+        }else{
+          const corps = err.error.corps;
+          this.printErrorToGetAllOrFindResource(corps);
+        }
+        return throwError(err);
+      })
+    )
+  }
+
+  public saveCartItems(cartItems:CartItem[]): Observable<any> {
+    return this.http.post(URL + 'api/customer/logged/order',cartItems, { headers: this.createAuthorizationHeader() });
+  }
   
 
   printErrorToGetAllOrFindResource(corps:any){
@@ -200,11 +405,16 @@ export class CustomerServiceService {
             });
             break;
           default:
-            this.snackBar.open('Error getting categories', 'Close', {
+            this.snackBar.open('Error getting', 'Close', {
               duration: 7000,
             });
         }
       }
+    }
+
+    private createAuthorizationHeader(): HttpHeaders {
+      const headers = new HttpHeaders().set('Authorization', 'Bearer ' +  localStorage.getItem('token'));
+      return headers;
     }
 
 

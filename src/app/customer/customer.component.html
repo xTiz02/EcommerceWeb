@@ -100,13 +100,22 @@
                 FAVORITE
               </a>
             </div>
-            <div class="widget-text">
-              <a routerLink="/login">
-                <mat-icon>
-                  person_outline
-                </mat-icon>
-                LOGIN
-              </a>
+            <div class="widget-text"> 
+              @if (isCustomer) {
+                <a routerLink="/customer/account">
+                  <mat-icon>
+                    person_outline
+                  </mat-icon>
+                    ACCOUNT
+                </a>
+              }@else {
+                <a routerLink="/login">
+                  <mat-icon>
+                    person_outline
+                  </mat-icon>
+                    LOGIN
+                </a>
+              }
             </div>
             <div class="widget-text">
               <a routerLink="/signup">
@@ -152,12 +161,10 @@
                   </div>
                 </div>
                 <div class="main-menu-wraper-2">
-                  <div class="car">
-                    <mat-icon>
-                      local_grocery_store
-                    </mat-icon>
-                    <span>3</span>
-                  </div>
+                  <button mat-icon-button type='button' routerLink='/customer/cart' class="car">
+                    <mat-icon  [matBadge]='cartItemsCount' [matBadgeColor]="'warn'">shopping_cart</mat-icon>
+                    
+                  </button>
                   <div class="price">
                     <span>$1030</span>
                   </div>
@@ -170,7 +177,8 @@
           <mat-toolbar-row class="container-toolbar">
             <div class="main-menu">
               <div>
-                <button mat-button routerLink="/customer/view-products">Products</button>
+                <button mat-button [routerLink]="['/customer/view-products']"
+                [queryParams]="{ order: 'all'}">Products</button>
               </div>
               <div>
                 <button mat-button [matMenuTriggerFor]="menu1" fragment>Categories</button>
